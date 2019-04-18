@@ -49,8 +49,8 @@ namespace Checkout.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>()
-                .HasKey(c => c.Id);
+            //modelBuilder.Entity<Customer>()
+                //.HasKey(c => c.Id);
         }
 
         public DbSet<Customer> Customers { get; set; }

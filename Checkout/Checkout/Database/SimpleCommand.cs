@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Checkout.Database
 {
-    class SimpleCommand :ICommand
+    public class SimpleCommand :ICommand
     {
         
         private readonly Func<bool> canExecute;

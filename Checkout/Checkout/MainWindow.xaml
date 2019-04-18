@@ -31,6 +31,8 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
         <Grid Background="PaleTurquoise" Grid.ColumnSpan="2" Grid.RowSpan="10">
             <Grid.ColumnDefinitions>
@@ -54,18 +56,18 @@
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold">Product</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Price</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" FontWeight="Bold">Quantity</TextBlock>
-            <TextBlock Grid.Row="2" Text="{Binding Product1Name}"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Product1Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding Product1Quantity}"/>
-            <TextBlock Grid.Row="3" Text="{Binding Product2Name}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Product2Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding Product2Quantity}"/>
-            <TextBlock Grid.Row="4" Text="{Binding Product3Name}"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Product3Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Text="{Binding Product3Quantity}"/>
-            <TextBlock Grid.Row="5" Text="{Binding Product4Name}"/>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Product4Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Product4Quantity}"/>
+            <TextBlock Grid.Row="2" Text="{Binding Product1.Name}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Product1.Price}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding Product1.Quantity}"/>
+            <TextBlock Grid.Row="3" Text="{Binding Product2.Name}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Product2.Price}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding Product2.Quantity}"/>
+            <TextBlock Grid.Row="4" Text="{Binding Product3.Name}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Product3.Price}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Text="{Binding Product3.Quantity}"/>
+            <TextBlock Grid.Row="5" Text="{Binding Product4.Name}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Product4.Price}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Product4.Quantity}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
             <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
             <Button VerticalAlignment="Center" Width="100" Content="Checkout" Grid.Row="8" Grid.ColumnSpan="3" Command="{Binding Purchase}"/>
@@ -168,5 +170,28 @@
 
 
         </Grid>
+
+        <StackPanel Grid.Row="14" Background="Green" Grid.ColumnSpan="7">
+            <ListView x:Name="listViewProducts"
+                      ItemsSource="{Binding ProductList}">
+                <ListView.Template>
+                    <ControlTemplate>
+                        <Viewbox>
+                            <StackPanel Orientation="Horizontal">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Price}" />
+                                </Grid>
+                            </StackPanel>
+                        </Viewbox>
+                    </ControlTemplate>
+                </ListView.Template>                
+            </ListView>
+        </StackPanel>
+        
     </Grid>
 </Window>
