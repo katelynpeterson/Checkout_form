@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-//using Checkout.VMs.Entity;
+using Checkout.VMs.Entity;
 
 namespace Checkout.Data
 {
@@ -18,7 +18,7 @@ namespace Checkout.Data
 
         public void AddCustomer(Customer c)
         {
-            context.Customer.Add(c);
+            context.Customers.Add(c);
             context.SaveChanges();
         }
 

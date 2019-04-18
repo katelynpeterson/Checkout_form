@@ -26,10 +26,5 @@ namespace Checkout
             
             InitializeComponent();
         }
-
-        public MainWindow(CheckoutVM vm) : this()
-        {
-            BindingContext = vm;
-        }
     }
 }

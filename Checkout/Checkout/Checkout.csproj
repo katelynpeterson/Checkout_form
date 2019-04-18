@@ -160,6 +160,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\IDataStore.cs" />
+    <Compile Include="Database\SimpleCommand.cs" />
     <Compile Include="VMs\CheckoutVM.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\Address.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\City.cs" />
