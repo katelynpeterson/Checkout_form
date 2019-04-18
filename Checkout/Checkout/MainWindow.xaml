@@ -30,6 +30,8 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
@@ -57,23 +59,117 @@
             <TextBlock Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" FontWeight="Bold">Quantity</TextBlock>
             <TextBlock Grid.Row="2" Text="{Binding Product1Name}"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Product1Price}"/>
-            <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Product1Quantity}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding Product1Quantity}"/>
             <TextBlock Grid.Row="3" Text="{Binding Product2Name}"/>
             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Product2Price}"/>
-            <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Product2Quantity}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding Product2Quantity}"/>
             <TextBlock Grid.Row="4" Text="{Binding Product3Name}"/>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Product3Price}"/>
-            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Product3Quantity}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Text="{Binding Product3Quantity}"/>
             <TextBlock Grid.Row="5" Text="{Binding Product4Name}"/>
             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Product4Price}"/>
-            <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Product4Quantity}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Product4Quantity}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
             <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
-            <Button Width="100" Content="Checkout" Grid.Row="8" Grid.ColumnSpan="3" Command="{Binding Purchase}"/>
+            <Button VerticalAlignment="Center" Width="100" Content="Checkout" Grid.Row="8" Grid.ColumnSpan="3" Command="{Binding Purchase}"/>
         </Grid>
-        <Grid Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="10" Background="PaleTurquoise" Visibility="{Binding customerBool}"> 
+        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding customerBool}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1" Text="Email:"/>
+            <TextBox VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="7" Text="{Binding emailAddress}"/>
+            <Button Width="75" Content="Search" Grid.Column="8" Grid.ColumnSpan="2" Command="{Binding Search}"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="9" Background="PaleTurquoise" Visibility="{Binding verifyBool}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" Text="  First Name"/>
+            <TextBox Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="{Binding FirstName}"/>
+            <TextBlock Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Center"  Text="  Last Name"/>
+            <TextBox Grid.Column="7" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="{Binding LastName}"/>
+            <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="5" Grid.Row="1" Text="  Shipping Address:" FontWeight="Bold"/>
+            <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2" Text="  Street:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.Row="2" Grid.Column="2" Text="{Binding sStreet}"/>
+            <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Text="  City:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="2" Text="{Binding sCity}" />
+            <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Center"  Text="  State:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="3" Grid.Column="6" Text="{Binding sState}" />
+            <TextBlock Grid.Column="7" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="3" Text="  Zip:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="8" Text="{Binding sZip}" />
             
-            
+            <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="5" Grid.Row="4" Text="  Billing Address:" FontWeight="Bold"/>
+            <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="5" Text="  Street:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.Row="5" Grid.Column="2" Text="{Binding bStreet}"/>
+            <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Text="  City:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="2" Text="{Binding bCity}"/>
+            <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Center"  Text="  State:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="6" Grid.Column="6" Text="{Binding bState}" />
+            <TextBlock Grid.Column="7" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="6" Text="  Zip:" />
+            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="8" Text="{Binding bZip}"/>
+
+            <Button VerticalAlignment="Center" Width="150" Content="Update/Add" Grid.Row="8" Grid.ColumnSpan="10" Command="{Binding Update}"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="11" Grid.RowSpan="3" Background="PaleTurquoise" Visibility="{Binding finalBool}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.ColumnSpan="2" Text="Credit Card" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Grid.ColumnSpan="6" Text="{Binding CCNUM}" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="Exp" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="/" VerticalAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Right" Grid.Row="1" Grid.Column="5" Text="CVV:  " VerticalAlignment="Center"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding expMonth}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding expYear}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="6" Text="{Binding CVV}"/>
+            <Button Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="6" Content="Submit Purchase" Command="{Binding Submit}"/>
+
+
         </Grid>
     </Grid>
 </Window>
