@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VMs\CheckoutVM.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\Address.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\City.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\EmailAddress.cs" />
@@ -68,11 +69,9 @@
     <Compile Include="VMs\Entity\Customer.cs" />
     <Compile Include="VMs\Entity\Order.cs" />
     <Compile Include="VMs\Entity\Product.cs" />
-    <Compile Include="VMs\OneTimeUse\CreditCard\CCard.cs" />
+    <Compile Include="VMs\OneTimeUse\CreditCard\CCardNum.cs" />
     <Compile Include="VMs\OneTimeUse\CreditCard\CVV.cs" />
-    <Compile Include="VMs\OneTimeUse\CreditCard\EXDate.cs" />
-    <Compile Include="VMs\OneTimeUse\CreditCard\NameOnCard.cs" />
-    <Compile Include="VMs\CheckoutVM.cs" />
+    <Compile Include="VMs\OneTimeUse\CreditCard\ExpDate.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

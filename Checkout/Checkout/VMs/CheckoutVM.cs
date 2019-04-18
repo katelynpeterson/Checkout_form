@@ -1,13 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class CheckoutVM
-
+namespace Checkout.VMs
 {
-	public CheckoutVM()
-	{
-        createCustomer();
-        createOrder();
-        checkCredit();
-        completeTransaction();
-	}
+    class CheckoutVM
+    {
+    }
 }

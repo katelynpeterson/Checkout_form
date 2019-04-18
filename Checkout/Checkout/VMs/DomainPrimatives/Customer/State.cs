@@ -48,4 +48,4 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         }
     }
 }
-}
+

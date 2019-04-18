@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.VMs.OneTimeUse.CreditCard
 {
-    class CVV
+    class CCardNum
     {
     }
 }
