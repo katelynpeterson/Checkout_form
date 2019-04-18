@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.VMs.DomainPrimatives.Product
 {
-    class Price
+    public class Price
     {
     }
 }

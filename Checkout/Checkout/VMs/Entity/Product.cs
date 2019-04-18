@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.VMs.Entity
 {
-    class Product
+    public class Product
     {
     }
 }
