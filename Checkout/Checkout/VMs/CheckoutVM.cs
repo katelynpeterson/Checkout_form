@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.VMs
 {
-    class CheckoutVM
+    public class CheckoutVM
     {
     }
 }
