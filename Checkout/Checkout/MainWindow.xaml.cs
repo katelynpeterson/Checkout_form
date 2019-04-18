@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Checkout.VMs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,11 @@ namespace Checkout
         {
             
             InitializeComponent();
+        }
+
+        public MainWindow(CheckoutVM vm) : this()
+        {
+            BindingContext = vm;
         }
     }
 }
