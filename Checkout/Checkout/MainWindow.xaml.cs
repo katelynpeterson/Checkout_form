@@ -22,6 +22,7 @@ namespace Checkout
     {
         public MainWindow()
         {
+            
             InitializeComponent();
         }
     }
