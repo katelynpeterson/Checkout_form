@@ -70,7 +70,12 @@
             <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Order.Quantity4}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
             <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
-            <Button VerticalAlignment="Center" Width="100" Content="Checkout" Grid.Row="8" Grid.ColumnSpan="3" Command="{Binding Purchase}"/>
+            <Button VerticalAlignment="Center"
+                    Width="100"
+                    Content="Checkout"
+                    Grid.Row="8"
+                    Grid.ColumnSpan="3"
+                    Command="{Binding PurchaseCommand}"/>
         </Grid>
         <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding customerBool, Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
