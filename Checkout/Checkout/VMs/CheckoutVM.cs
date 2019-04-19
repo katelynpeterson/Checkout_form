@@ -31,7 +31,8 @@ namespace Checkout.VMs
         public CheckoutVM() {
             ProductList = new ObservableCollection<Product>();
             QuantityList = new ObservableCollection<int>();
-            
+            Customer C = new Customer("Joe", "Blow", "123 Anywhere", "Ephraim", "UT", "84627", "Po Box 123", "Ephraim", "UT", "84627", "Joe@Joe.com");
+            //dataStore.AddCustomer(C);
             ProductList.Add (new Product (1, "African Safari", 2000.00 ));
             ProductList.Add (new Product (2, "Mexico Safari", 1500.00 ));
             ProductList.Add (new Product (3, "Australian Safari", 4200.00 ));
