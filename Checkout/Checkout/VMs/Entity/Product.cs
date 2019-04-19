@@ -6,53 +6,40 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Checkout.VMs.DomainPrimatives.Product;
 
 namespace Checkout.VMs.Entity
 {
-    public class Product :INotifyPropertyChanged
+    public class Product : INotifyPropertyChanged
     {
+        public Product(int id, string name, double price)
+        {
+            ID = id;
+            Description = name;
+            Cost = price;
+
+        }
+
         private int _id;
-        private string _name;
-        private double _price;
-
         public int ID
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                OnPropertyChanged("ID");
-            }
+        {   get{ return _id; }
+            set { SetField(ref _id, value); }
         }
 
-
-        public string Name
+        private string description;
+        public string Description
         {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
+            get { return description; }
+            set { SetField(ref description, value); }
+        }
+        
+        private double cost;
+        public double Cost
+        {
+            get { return cost; }
+            set { SetField(ref cost, value); }
         }
 
-
-        public double Price
-        {
-            get { return _price; }
-            set
-            {
-                _price = value;
-                OnPropertyChanged("Price");
-            }
-        }
-
-        private int quantity;
-        public int Quantity
-        {
-            get { return quantity; }
-            set { SetField(ref quantity, value); }
-        }
 
 
         #region INotifyPropertyChanged Implementation
@@ -71,5 +58,6 @@ namespace Checkout.VMs.Entity
             return true;
         }
         #endregion
+
     }
-    }
+}

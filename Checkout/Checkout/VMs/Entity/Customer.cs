@@ -22,7 +22,7 @@ namespace Checkout.VMs.Entity
             Address shippingAddress = new Address(sstreet, scity, sstate, szip);
             Address billingAddress = new Address(bstreet, bcity, bstate, bzip);
 
-            EmailAddress emailAddress = new EmailAddress(email);
+            EmailAddress eMail = new EmailAddress(email);
         }
 
         private Name firstName;
@@ -30,6 +30,31 @@ namespace Checkout.VMs.Entity
         {
             get; private set;
         }
+
+        private Name lastName;
+        public Name LastName
+        {
+            get; private set;
+        }
+
+        private Address shippingAddress;
+        public Address ShippingAddress
+        {
+            get; private set;
+        }
+
+        private Address billingAddress;
+        public Address BillingAddress
+        {
+            get; private set;
+        }
+
+        private EmailAddress eMail;
+        public EmailAddress EMail
+        {
+            get; private set;
+        }
+
 
     }
 }

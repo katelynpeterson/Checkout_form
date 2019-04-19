@@ -22,14 +22,20 @@ namespace Checkout.VMs
         //public Product NewProduct { get; private set; }
 
         public CheckoutVM() {
-
-            Product1 = new Product {ID = 1, Name = "African Safari", Price=2000.00 };
-            Product2 = new Product { ID = 2, Name = "African Safari", Price = 2000.00 };
-            Product3 = new Product { ID = 3, Name = "African Safari", Price = 2000.00 };
-            Product4 = new Product { ID = 4, Name = "African Safari", Price = 2000.00 };
             
+            Product1 = new Product (1, "African Safari", 2000.00 );
+            Product2 = new Product (2, "Mexico Safari", 1500.00 );
+            Product3 = new Product (3, "Australian Safari", 4200.00 );
+            Product4 = new Product (4, "Antarctic Safari", 7100.00 );
+            CustomerBool = false;
         }
-    
+
+        private bool customerBool;
+        public bool CustomerBool
+        {
+            get { return customerBool; }
+            set { SetField(ref customerBool, value); }
+        }
 
         private readonly IDataStore dataStore;
 
@@ -37,6 +43,7 @@ namespace Checkout.VMs
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
             Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
+                
         }
 
         public IDataStore DataStore => dataStore;

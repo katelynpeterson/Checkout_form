@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{StaticResource CheckoutVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
-    
+        Title="Checkout" Height="600" Width="800">
+   
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -56,23 +56,23 @@
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold">Product</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Price</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" FontWeight="Bold">Quantity</TextBlock>
-            <TextBlock Grid.Row="2" Text="{Binding Product1.Name}"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Product1.Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding Product1.Quantity}"/>
-            <TextBlock Grid.Row="3" Text="{Binding Product2.Name}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Product2.Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding Product2.Quantity}"/>
-            <TextBlock Grid.Row="4" Text="{Binding Product3.Name}"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Product3.Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Text="{Binding Product3.Quantity}"/>
-            <TextBlock Grid.Row="5" Text="{Binding Product4.Name}"/>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Product4.Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Product4.Quantity}"/>
+            <TextBlock Grid.Row="2" Text="{Binding Product1.Description}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Product1.Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding Order.Quantity1}"/>
+            <TextBlock Grid.Row="3" Text="{Binding Product2.Description}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Product2.Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding Order.Quantity2}"/>
+            <TextBlock Grid.Row="4" Text="{Binding Product3.Description}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Product3.Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Text="{Binding Order.Quantity3}"/>
+            <TextBlock Grid.Row="5" Text="{Binding Product4.Description}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Product4.Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Order.Quantity4}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
             <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
             <Button VerticalAlignment="Center" Width="100" Content="Checkout" Grid.Row="8" Grid.ColumnSpan="3" Command="{Binding Purchase}"/>
         </Grid>
-        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding customerBool}">
+        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding customerBool, Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>

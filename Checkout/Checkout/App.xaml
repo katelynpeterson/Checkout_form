@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Checkout.VMs"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <local:CheckoutVM x:Key="CheckoutVM"/>
     </Application.Resources>
 </Application>

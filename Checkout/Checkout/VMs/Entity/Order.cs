@@ -8,7 +8,10 @@ namespace Checkout.VMs.Entity
 {
     public class Order
     {
-        public Order() { }
+        public Order(int quantity)
+        {
+            int Quantity = quantity;
+        }
         Guid orderID = Guid.NewGuid();
 
     }

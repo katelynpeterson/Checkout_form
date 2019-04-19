@@ -172,8 +172,8 @@
     <Compile Include="VMs\DomainPrimatives\Customer\Street.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\Zip.cs" />
     <Compile Include="VMs\DomainPrimatives\Order\Quantity.cs" />
-    <Compile Include="VMs\DomainPrimatives\Product\Description.cs" />
     <Compile Include="VMs\DomainPrimatives\Product\Price.cs" />
+    <Compile Include="VMs\DomainPrimatives\Product\ProductName.cs" />
     <Compile Include="VMs\Entity\Customer.cs" />
     <Compile Include="VMs\Entity\Order.cs" />
     <Compile Include="VMs\Entity\Product.cs" />
