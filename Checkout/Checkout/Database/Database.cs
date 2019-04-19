@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Checkout.VMs.Entity;
+using Checkout.VMs.DomainPrimatives;
 
 namespace Checkout.Data
 {
@@ -32,6 +33,18 @@ namespace Checkout.Data
         {
             return context.Customers;
         }
+
+       public void AddLog(Log l)
+        {
+            context.Log.Add(l);
+            context.SaveChanges();
+        }
+
+        public void AddOrder(Order o)
+        {
+            context.Orders.Add(o);
+            context.SaveChanges();
+        }
     }
 
     class CheckoutContext : DbContext
@@ -60,6 +73,8 @@ namespace Checkout.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Log> Log { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
     }
 }

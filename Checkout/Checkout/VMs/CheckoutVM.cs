@@ -10,6 +10,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Checkout.VMs.DomainPrimatives;
+using Checkout.VMs.DomainPrimatives.Order;
 
 namespace Checkout.VMs
 {
@@ -27,22 +29,68 @@ namespace Checkout.VMs
         //public Product NewProduct { get; private set; }
 
         public CheckoutVM() {
+            ProductList = new ObservableCollection<Product>();
+            QuantityList = new ObservableCollection<int>();
             
-            Product1 = new Product (1, "African Safari", 2000.00 );
-            Product2 = new Product (2, "Mexico Safari", 1500.00 );
-            Product3 = new Product (3, "Australian Safari", 4200.00 );
-            Product4 = new Product (4, "Antarctic Safari", 7100.00 );
+            ProductList.Add (new Product (1, "African Safari", 2000.00 ));
+            ProductList.Add (new Product (2, "Mexico Safari", 1500.00 ));
+            ProductList.Add (new Product (3, "Australian Safari", 4200.00 ));
+            ProductList.Add (new Product (4, "Antarctic Safari", 7100.00 ));
+            for (int i = 0; i < ProductList.Count(); i++)
+                QuantityList.Add (4);
+            Total = 0;
+            for (int i = 0; i < ProductList.Count(); i++)
+            {
+                Total += ProductList[i].Cost * QuantityList[i];
+            }
             CustomerBool = false;
+            VerifyBool = false;
+            FinalBool = false;
+
+        }
+        private double total;
+        public double Total
+        {
+            get
+            {
+                return total;
+            }
+            set
+            {
+                total = 0;
+               
+                for (int i = 0; i < ProductList.Count(); i++)
+                {
+                    total += ProductList[i].Cost * QuantityList[i];
+                }
+                OnPropertyChanged("Total");
+
+            }
         }
 
-        
+        public ObservableCollection<int> QuantityList
+        {
+            get; private set;
+        }
+                
         private bool customerBool;
         public bool CustomerBool
         {
             get { return customerBool; }
             set { SetField(ref customerBool, value); }
         }
-
+        private bool verifyBool;
+        public bool VerifyBool
+        {
+            get { return verifyBool; }
+            set { SetField(ref verifyBool, value); }
+        }
+        private bool finalBool;
+        public bool FinalBool
+        {
+            get { return finalBool; }
+            set { SetField(ref finalBool, value); }
+        }
         private readonly IDataStore dataStore;
 
         public CheckoutVM(IDataStore dataStore)
@@ -54,126 +102,153 @@ namespace Checkout.VMs
 
         public IDataStore DataStore => dataStore;
 
-        private Product product1;
-        public Product Product1
-        {
-            get { return product1; }
-            set { SetField(ref product1, value); }
-        }
-
-        private Product product2;
-        public Product Product2
-        {
-            get { return product2; }
-            set { SetField(ref product2, value); }
-        }
-
-        private Product product3;
-        public Product Product3
-        {
-            get { return product3; }
-            set { SetField(ref product3, value); }
-        }
-
-        private Product product4;
-        public Product Product4
-        {
-            get { return product4; }
-            set { SetField(ref product4, value); }
-        }
+        public ObservableCollection<Product> ProductList
+        { get; private set; }
 
         private string firstname;
-        public string Firstname
+        public string FirstName
         {
             get { return firstname; }
             set { SetField(ref firstname, value); }
         }
 
         private string lastname;
-        public string Lastname
+        public string LastName
         {
             get { return lastname; }
             set { SetField(ref lastname, value); }
         }
 
         private string shippingStreet;
-        public string ShippingStreet
+        public string sStreet
         {
             get { return shippingStreet; }
             set { SetField(ref shippingStreet, value); }
         }
 
         private string shippingCity;
-        public string ShippingCity
+        public string sCity
         {
             get { return shippingCity; }
             set { SetField(ref shippingCity, value); }
         }
 
         private string shippingState;
-        public string ShippingState
+        public string sState
         {
             get { return shippingState; }
             set { SetField(ref shippingState, value); }
         }
 
         private string shippingZip;
-        public string ShippingZip
+        public string sZip
         {
             get { return shippingZip; }
             set { SetField(ref shippingZip, value); }
         }
 
         private string billingStreet;
-        public string BillingStreet
+        public string bStreet
         {
             get { return billingStreet; }
             set { SetField(ref billingStreet, value); }
         }
 
         private string billingCity;
-        public string BillingCity
+        public string bCity
         {
             get { return billingCity; }
             set { SetField(ref billingCity, value); }
         }
 
         private string billingState;
-        public string BillingState
+        public string bState
         {
             get { return billingState; }
             set { SetField(ref billingState, value); }
         }
 
         private string billingZip;
-        public string BillingZip
+        public string bZip
         {
             get { return billingZip; }
             set { SetField(ref billingZip, value); }
         }
 
-        private string email;
-        public string Email
+        private bool isNewCustomer;
+        public bool IsNewCustomer
         {
-            get { return email; }
-            set { SetField(ref email, value); }
+            get { return isNewCustomer; }
+            set { SetField(ref isNewCustomer, value); }
+        }
+
+        private string emailAddress;
+        public string EmailAddress
+        {
+            get { return emailAddress; }
+            set { SetField(ref emailAddress, value); }
+        }
+        private bool emailLock;
+        public bool EmailLock
+        {
+            get { return emailLock; }
+            set { SetField(ref emailLock, value); }
+        }
+
+        private bool orderLock;
+        public bool OrderLock
+        {
+            get { return orderLock; }
+            set { SetField(ref orderLock, value); }
         }
         private ICommand purchaseCommand;
         public ICommand PurchaseCommand => purchaseCommand ?? (purchaseCommand = new SimpleCommand(
             () =>
             {
-                ObservableCollection<Order> temp = new ObservableCollection<Order>();
-                foreach (var item in OrderList)
+                OrderLock = true;
+                CustomerBool = true;
+                ObservableCollection<Product> tempP = new ObservableCollection<Product>();
+                ObservableCollection<int> tempQ = new ObservableCollection<int>();
+               for (int i = 0; i< QuantityList.Count(); i++)
                 {
-                    if (item.Quantity > 0)
+                    if (QuantityList[i] > 0)
                     {
-                        temp.Add(item);
+                        tempP.Add(ProductList[i]);
+                        tempQ.Add(QuantityList[i]);
                     }
                 }
-                foreach (var item in temp)
-                {
-                    CustomerOrderList.Add(item);
-                }
+               //DataStore.AddLog(new Log("Order Created"));
+               Order CustomerOrder = new Order(tempP, tempQ);
+            }));
+        private ICommand searchCommand;
+        public ICommand SearchCommand => searchCommand ?? (searchCommand = new SimpleCommand(
+            () =>
+            {   if(EmailAddress == null)
+                    { return; }
+                DomainPrimatives.Customer.EmailAddress email = new DomainPrimatives.Customer.EmailAddress(EmailAddress);
+                VerifyBool = true;
+                EmailLock = true;
+                ObservableCollection<Customer> temp = new ObservableCollection<Customer>();
+                    foreach (var c in DataStore.GetAllCustomers())
+                    {
+                        if (c.EMail == email)
+                        {
+                            FirstName = c.FirstName.NewName;
+                            LastName = c.LastName.NewName;
+                            sStreet = c.ShippingAddress.Street.AddressStreet;
+                            sCity = c.ShippingAddress.City.AddressCity;
+                            sState = c.ShippingAddress.State.AddressState;
+                            sZip = c.ShippingAddress.Zip.AddressZip;
+                            bStreet = c.BillingAddress.Street.AddressStreet;
+                            bCity = c.BillingAddress.City.AddressCity;
+                            bState = c.BillingAddress.State.AddressState;
+                            bZip = c.BillingAddress.Zip.AddressZip;
+                        }
+                    }
+                    
+
+                
+
             }));
 
 
@@ -182,17 +257,17 @@ namespace Checkout.VMs
             () =>
             {
                 DataStore.AddCustomer(new Customer(
-                    Firstname,
-                    Lastname,
-                    ShippingStreet,
-                    ShippingCity,
-                    ShippingState,
-                    ShippingZip,
-                    BillingStreet,
-                    BillingCity,
-                    BillingState,
-                    BillingZip,
-                    Email));
+                    FirstName,
+                    LastName,
+                    sStreet,
+                    sCity,
+                    sState,
+                    sZip,
+                    bStreet,
+                    bCity,
+                    bState,
+                    bZip,
+                    EmailAddress));
                 Customers.Clear();
                 foreach (var c in DataStore.GetAllCustomers())
                     Customers.Add(c);

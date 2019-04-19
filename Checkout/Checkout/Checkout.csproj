@@ -171,6 +171,7 @@
     <Compile Include="VMs\DomainPrimatives\Customer\State.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\Street.cs" />
     <Compile Include="VMs\DomainPrimatives\Customer\Zip.cs" />
+    <Compile Include="VMs\DomainPrimatives\Log.cs" />
     <Compile Include="VMs\DomainPrimatives\Order\Quantity.cs" />
     <Compile Include="VMs\DomainPrimatives\Product\Price.cs" />
     <Compile Include="VMs\DomainPrimatives\Product\ProductName.cs" />

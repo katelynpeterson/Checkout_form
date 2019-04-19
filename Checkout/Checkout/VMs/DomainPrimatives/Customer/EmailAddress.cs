@@ -9,7 +9,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class EmailAddress
     {
-        public EmailAddress (String s)
+        public EmailAddress(String s)
         {
             if (validateEmail(s))
             {
@@ -17,7 +17,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 s = s.ToLower();
                 Email = s;
             }
-                
+
             else
                 failGracefully();
         }
@@ -31,7 +31,8 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         public Boolean validateEmail(String s)
         {
             // Check length
-            if (s.Length > 30)
+
+            if (s.Length > 30 || s ==null)
             {
                 //Display string to long message
                 return false;

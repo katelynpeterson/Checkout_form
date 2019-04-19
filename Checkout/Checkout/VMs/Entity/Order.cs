@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Checkout.VMs.DomainPrimatives.Order;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,11 +12,24 @@ namespace Checkout.VMs.Entity
 {
     public class Order : INotifyPropertyChanged
     {
-        public Order(int quantity)
+        public Order(ObservableCollection<Product> products, ObservableCollection<int> amounts)
         {
-            Quantity = quantity;
+            Products = products;
+            Amounts = amounts;
         }
         Guid orderID = Guid.NewGuid();
+
+        private ObservableCollection<Product> products;
+        public ObservableCollection<Product> Products
+        {
+            get; private set;
+        }
+
+        private ObservableCollection<int> amounts;
+         public ObservableCollection<int> Amounts
+        {
+            get; private set;
+        }
 
         private int quantity;
         public int Quantity

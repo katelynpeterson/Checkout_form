@@ -56,20 +56,20 @@
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold">Product</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Price</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" FontWeight="Bold">Quantity</TextBlock>
-            <TextBlock Grid.Row="2" Text="{Binding Product1.Description}"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Product1.Cost}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="{Binding Order.Quantity1}"/>
-            <TextBlock Grid.Row="3" Text="{Binding Product2.Description}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Product2.Cost}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Text="{Binding Order.Quantity2}"/>
-            <TextBlock Grid.Row="4" Text="{Binding Product3.Description}"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Product3.Cost}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" Text="{Binding Order.Quantity3}"/>
-            <TextBlock Grid.Row="5" Text="{Binding Product4.Description}"/>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Product4.Cost}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" Text="{Binding Order.Quantity4}"/>
+            <TextBlock Grid.Row="2" Text="{Binding ProductList[0].Description}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ProductList[0].Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[0], Mode=TwoWay}"/>
+            <TextBlock Grid.Row="3" Text="{Binding ProductList[1].Description}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ProductList[1].Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"  IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[1], Mode=TwoWay}"/>
+            <TextBlock Grid.Row="4" Text="{Binding ProductList[2].Description}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding ProductList[2].Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[2], Mode=TwoWay}"/>
+            <TextBlock Grid.Row="5" Text="{Binding ProductList[3].Description}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding ProductList[3].Cost}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[3], Mode=TwoWay}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
-            <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Button VerticalAlignment="Center"
                     Width="100"
                     Content="Checkout"
@@ -77,7 +77,7 @@
                     Grid.ColumnSpan="3"
                     Command="{Binding PurchaseCommand}"/>
         </Grid>
-        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding customerBool, Converter={StaticResource BoolToVis}}">
+        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding CustomerBool, Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
@@ -94,10 +94,10 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="1" Text="Email:"/>
-            <TextBox VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="7" Text="{Binding emailAddress}"/>
-            <Button Width="75" Content="Search" Grid.Column="8" Grid.ColumnSpan="2" Command="{Binding Search}"/>
+            <TextBox IsReadOnly="{Binding EmailLock}" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="7" Text="{Binding EmailAddress}"/>
+            <Button Width="75" Content="Search" Grid.Column="8" Grid.ColumnSpan="2" Command="{Binding SearchCommand}"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="9" Background="PaleTurquoise" Visibility="{Binding verifyBool}">
+        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="9" Background="PaleTurquoise" Visibility="{Binding VerifyBool,Converter={StaticResource BoolToVis}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
@@ -147,7 +147,7 @@
 
             <Button VerticalAlignment="Center" Width="150" Content="Update/Add" Grid.Row="8" Grid.ColumnSpan="10" Command="{Binding Update}"/>
         </Grid>
-        <Grid Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="11" Grid.RowSpan="3" Background="PaleTurquoise" Visibility="{Binding finalBool}">
+        <Grid Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="11" Grid.RowSpan="3" Background="PaleTurquoise" Visibility="{Binding FinalBool,Converter={StaticResource BoolToVis}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
@@ -176,27 +176,7 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="14" Background="Green" Grid.ColumnSpan="7">
-            <ListView x:Name="listViewProducts"
-                      ItemsSource="{Binding ProductList}">
-                <ListView.Template>
-                    <ControlTemplate>
-                        <Viewbox>
-                            <StackPanel Orientation="Horizontal">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Name}" />
-                                    <TextBlock Text="{Binding Price}" />
-                                </Grid>
-                            </StackPanel>
-                        </Viewbox>
-                    </ControlTemplate>
-                </ListView.Template>                
-            </ListView>
-        </StackPanel>
+        
         
     </Grid>
 </Window>
