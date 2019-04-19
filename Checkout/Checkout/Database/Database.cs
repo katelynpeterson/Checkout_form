@@ -22,6 +22,12 @@ namespace Checkout.Data
             context.SaveChanges();
         }
 
+        public void PurchaseProduct(Product p)
+        {
+            context.Products.Add(p);
+            context.SaveChanges();
+        }
+
         public IEnumerable<Customer> GetAllCustomers()
         {
             return context.Customers;
@@ -54,5 +60,6 @@ namespace Checkout.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

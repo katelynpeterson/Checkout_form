@@ -11,9 +11,15 @@ namespace Checkout.VMs.Entity
 {
     public class Product :INotifyPropertyChanged
     {
+        public Product()
+        {
+
+        }
+
         private int _id;
         private string _name;
         private double _price;
+        private int _quantity;
 
         public int ID
         {
@@ -51,7 +57,9 @@ namespace Checkout.VMs.Entity
         public int Quantity
         {
             get { return quantity; }
-            set { SetField(ref quantity, value); }
+            set { _quantity = value;
+                OnPropertyChanged("Quantity");
+            }
         }
 
 

@@ -8,6 +8,7 @@ namespace Checkout.Data
     public interface IDataStore
     {
         void AddCustomer(Customer c);
+        void PurchaseProduct(Product p);
         IEnumerable<Customer> GetAllCustomers();
     }
 }

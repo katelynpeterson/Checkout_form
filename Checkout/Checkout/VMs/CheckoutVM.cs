@@ -9,27 +9,24 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Checkout.VMs
 {
     public class CheckoutVM : INotifyPropertyChanged
     {
-            public ObservableCollection<Product> ProductList
-        {
-            get; set;
-        }
-
-        //public Product NewProduct { get; private set; }
 
         public CheckoutVM() {
 
-            Product1 = new Product {ID = 1, Name = "African Safari", Price=2000.00 };
-            Product2 = new Product { ID = 2, Name = "African Safari", Price = 2000.00 };
-            Product3 = new Product { ID = 3, Name = "African Safari", Price = 2000.00 };
-            Product4 = new Product { ID = 4, Name = "African Safari", Price = 2000.00 };
-            
+            Product1 = new Product { ID = 1, Name = "African Safari", Price = 2000.00, Quantity =0 };
+            Product2 = new Product { ID = 2, Name = "Dream Catcher", Price = 35.00, Quantity = 0 };
+            Product3 = new Product { ID = 3, Name = "African Safari", Price = 2000.00, Quantity = 0 };
+            Product4 = new Product { ID = 4, Name = "African Safari", Price = 2000.00, Quantity = 0 };
+            ProductList.Add(Product1);
+            ProductList.Add(Product2);
+            ProductList.Add(Product3);
+            ProductList.Add(Product4);
         }
-    
 
         private readonly IDataStore dataStore;
 
@@ -41,6 +38,8 @@ namespace Checkout.VMs
 
         public IDataStore DataStore => dataStore;
 
+        //variables
+        #region
         private Product product1;
         public Product Product1
         {
@@ -145,9 +144,29 @@ namespace Checkout.VMs
             get { return email; }
             set { SetField(ref email, value); }
         }
+        #endregion 
 
-        private SimpleCommand addCustomerCommand;
-        public SimpleCommand AddCustomerCommand => addCustomerCommand ?? (addCustomerCommand = new SimpleCommand(
+        private ICommand purchaseCommand;
+        public ICommand PurchaseCommand => purchaseCommand ?? (purchaseCommand = new SimpleCommand(
+            ()=>
+            {
+                ObservableCollection<Product> temp = new ObservableCollection<Product>();
+                foreach(var item in ProductList)
+                {
+                    if(item.Quantity>0)
+                    {
+                        temp.Add(item);
+                    }
+                }
+                foreach(var item in temp)
+                {
+                    CustomerOrderList.Add(item);
+                }
+            }));
+
+
+        private ICommand addCustomerCommand;
+        public ICommand AddCustomerCommand => addCustomerCommand ?? (addCustomerCommand = new SimpleCommand(
             () =>
             {
                 DataStore.AddCustomer(new Customer(
@@ -168,6 +187,8 @@ namespace Checkout.VMs
             }));
 
         public ObservableCollection<Customer> Customers { get; private set; }
+        public ObservableCollection<Product> CustomerOrderList { get; private set; }
+        public ObservableCollection<Product> ProductList { get; private set; }
                
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
