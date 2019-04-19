@@ -37,7 +37,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 return false;
             }
             // Check characters
-            if (Regex.IsMatch(s, @"^[a-zA-Z] + $"))
+            if (Regex.IsMatch(s, @"^[a-zA-Z]"))
             {
                 return true;
             }

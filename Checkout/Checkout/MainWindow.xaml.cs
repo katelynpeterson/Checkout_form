@@ -1,4 +1,5 @@
-﻿using Checkout.VMs;
+﻿using Checkout.Data;
+using Checkout.VMs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace Checkout
         {
             
             InitializeComponent();
+           // datastore = new Checkout.Data.Database("database.db");
         }
+       // IDataStore datastore;
     }
 }

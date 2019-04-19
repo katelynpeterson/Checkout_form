@@ -32,7 +32,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 return false;
             }
             // Check characters
-            if (Regex.IsMatch(s, @"^[a-zA-Z0-9] + $"))
+            if (Regex.IsMatch(s, @"^[a-zA-Z0-9]"))
             {
                 return true;
             }
