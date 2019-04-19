@@ -9,14 +9,19 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Checkout.VMs
 {
-    public class CheckoutVM : INotifyPropertyChanged
+    public class CheckoutVM : INotifyPropertyChanged    
     {
-            public ObservableCollection<Product> ProductList
+            public ObservableCollection<Order> OrderList
         {
             get; set;
+        }
+            public ObservableCollection<Order> CustomerOrderList
+        {
+            get;set;
         }
 
         //public Product NewProduct { get; private set; }
@@ -30,6 +35,7 @@ namespace Checkout.VMs
             CustomerBool = false;
         }
 
+        
         private bool customerBool;
         public bool CustomerBool
         {
@@ -152,9 +158,27 @@ namespace Checkout.VMs
             get { return email; }
             set { SetField(ref email, value); }
         }
+        private ICommand purchaseCommand;
+        public ICommand PurchaseCommand => purchaseCommand ?? (purchaseCommand = new SimpleCommand(
+            () =>
+            {
+                ObservableCollection<Order> temp = new ObservableCollection<Order>();
+                foreach (var item in OrderList)
+                {
+                    if (item.Quantity > 0)
+                    {
+                        temp.Add(item);
+                    }
+                }
+                foreach (var item in temp)
+                {
+                    CustomerOrderList.Add(item);
+                }
+            }));
 
-        private SimpleCommand addCustomerCommand;
-        public SimpleCommand AddCustomerCommand => addCustomerCommand ?? (addCustomerCommand = new SimpleCommand(
+
+        private ICommand addCustomerCommand;
+        public ICommand AddCustomerCommand =>addCustomerCommand ?? (addCustomerCommand = new SimpleCommand(
             () =>
             {
                 DataStore.AddCustomer(new Customer(

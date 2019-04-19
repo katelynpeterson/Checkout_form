@@ -16,7 +16,7 @@ namespace Checkout.VMs.Entity
         {
             ID = id;
             Description = name;
-            Cost = price;
+           Cost = price;
 
         }
 
