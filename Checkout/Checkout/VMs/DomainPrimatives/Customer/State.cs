@@ -9,6 +9,10 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class State
     {
+        public State()
+        {
+
+        }
         public State(String s)
         {
             if (validateState(s))

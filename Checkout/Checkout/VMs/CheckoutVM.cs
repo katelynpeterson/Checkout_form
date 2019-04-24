@@ -29,6 +29,8 @@ namespace Checkout.VMs
         //public Product NewProduct { get; private set; }
 
         public CheckoutVM() {
+            dataStore = new Checkout.Data.Database("database.db");
+
             ProductList = new ObservableCollection<Product>();
             QuantityList = new ObservableCollection<int>();
             //Customer C = new Customer("Joe", "Blow", "123 Anywhere", "Ephraim", "UT", "84627", "Po Box 123", "Ephraim", "UT", "84627", "Joe@Joe.com");

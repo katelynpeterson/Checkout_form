@@ -9,6 +9,10 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class City
     {
+        public City()
+        {
+
+        }
         public City(String s)
         {
             if (validateCity(s))

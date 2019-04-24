@@ -181,6 +181,8 @@
     <Compile Include="VMs\OneTimeUse\CreditCard\CCardNum.cs" />
     <Compile Include="VMs\OneTimeUse\CreditCard\CVV.cs" />
     <Compile Include="VMs\OneTimeUse\CreditCard\ExpDate.cs" />
+    <Compile Include="VMs\OrderLineVM.cs" />
+    <Compile Include="VMs\OrderVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

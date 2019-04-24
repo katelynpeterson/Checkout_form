@@ -9,6 +9,10 @@ namespace Checkout.VMs.Entity
 {
     public class Customer
     {
+        public Customer()
+        {
+
+        }
         public Customer(string firstname, string lastname,
                         string sstreet, string scity, string sstate, string szip,
                         string bstreet, string bcity, string bstate, string bzip,

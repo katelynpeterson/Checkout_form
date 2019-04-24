@@ -26,8 +26,8 @@ namespace Checkout
         {
             
             InitializeComponent();
-           // datastore = new Checkout.Data.Database("database.db");
+            //datastore = new Checkout.Data.Database("database.db");
         }
-       // IDataStore datastore;
+        IDataStore datastore;
     }
 }

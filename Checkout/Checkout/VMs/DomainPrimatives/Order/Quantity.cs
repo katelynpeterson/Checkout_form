@@ -8,5 +8,9 @@ namespace Checkout.VMs.DomainPrimatives.Order
 {
     public class Quantity
     {
+        public Quantity()
+        {
+
+        }
     }
 }

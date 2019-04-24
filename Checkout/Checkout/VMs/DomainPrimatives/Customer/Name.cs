@@ -9,6 +9,10 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class Name
     {
+        public Name()
+        {
+
+        }
         public Name(String s)
         {
             if (validateName(s))

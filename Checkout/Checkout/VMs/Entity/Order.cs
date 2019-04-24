@@ -12,6 +12,10 @@ namespace Checkout.VMs.Entity
 {
     public class Order : INotifyPropertyChanged
     {
+        public Order()
+        {
+
+        }
         public Order(ObservableCollection<Product> products, ObservableCollection<int> amounts)
         {
             Products = products;

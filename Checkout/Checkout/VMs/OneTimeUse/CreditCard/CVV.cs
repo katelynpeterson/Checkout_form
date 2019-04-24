@@ -8,5 +8,9 @@ namespace Checkout.VMs.OneTimeUse.CreditCard
 {
     class CVV
     {
+        public CVV()
+        {
+
+        }
     }
 }

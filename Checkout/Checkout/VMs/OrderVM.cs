@@ -6,44 +6,24 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Checkout.VMs.DomainPrimatives.Product;
 
-namespace Checkout.VMs.Entity
+namespace Checkout.VMs
 {
-    public class Product : INotifyPropertyChanged
+    class OrderVM : INotifyPropertyChanged
     {
-        public Product()
+        private double total;
+        public double Total
         {
-
+            get { return total; }
+            set { SetField(ref total, value); }
         }
-        public Product(int id, string name, double price)
+
+        private ObservableCollection<OrderLineVM> line;
+        public ObservableCollection<OrderLineVM> Lines
         {
-            ID = id;
-            Description = name;
-           Cost = price;
-
+            set {
+                OnPropertyChanged("Total"); }
         }
-
-        private int _id;
-        public int ID
-        {   get{ return _id; }
-            set { SetField(ref _id, value); }
-        }
-
-        private string description;
-        public string Description
-        {
-            get { return description; }
-            set { SetField(ref description, value); }
-        }
-        
-        private double cost;
-        public double Cost
-        {
-            get { return cost; }
-            set { SetField(ref cost, value); }
-        }
-
 
 
         #region INotifyPropertyChanged Implementation
@@ -62,6 +42,5 @@ namespace Checkout.VMs.Entity
             return true;
         }
         #endregion
-
     }
 }

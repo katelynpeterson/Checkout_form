@@ -9,6 +9,10 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class EmailAddress
     {
+        public EmailAddress()
+        {
+
+        }
         public EmailAddress(String s)
         {
             if (validateEmail(s))

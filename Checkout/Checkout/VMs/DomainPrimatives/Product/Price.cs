@@ -9,6 +9,10 @@ namespace Checkout.VMs.DomainPrimatives.Product
 {
     public class Price
     {
+        public Price()
+        {
+
+        }
         public Price(double f)
         {
             if (validatePrice(f))

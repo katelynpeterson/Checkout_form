@@ -1,47 +1,28 @@
-﻿using System;
+﻿using Checkout.VMs.Entity;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Checkout.VMs.DomainPrimatives.Product;
 
-namespace Checkout.VMs.Entity
+namespace Checkout.VMs
 {
-    public class Product : INotifyPropertyChanged
+    class OrderLineVM :INotifyPropertyChanged
     {
-        public Product()
+        private Product product;
+        public Product MyProperty
         {
-
-        }
-        public Product(int id, string name, double price)
-        {
-            ID = id;
-            Description = name;
-           Cost = price;
-
+            get { return product; }
+            set { SetField(ref product, value); }
         }
 
-        private int _id;
-        public int ID
-        {   get{ return _id; }
-            set { SetField(ref _id, value); }
-        }
-
-        private string description;
-        public string Description
+        private int quantity;
+        public int Quantity
         {
-            get { return description; }
-            set { SetField(ref description, value); }
-        }
-        
-        private double cost;
-        public double Cost
-        {
-            get { return cost; }
-            set { SetField(ref cost, value); }
+            get { return quantity; }
+            set { SetField(ref quantity, value); }
         }
 
 

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Checkout" Height="600" Width="800">
    
-    <Grid>
+    <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
@@ -175,8 +175,21 @@
 
 
         </Grid>
+        <ListView ItemsSource="{Binding OrderVM.Lines}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <StackPanel>
 
-        
+                            <TextBlock Text="{Binding Product.Name}" />
+                            <TextBlock Text="{Binding Product.Price}" />
+                            <TextBlock Text="{Binding Quantity}" />
+                        </StackPanel>
+                    </Viewbox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Text="{Binding Order.Total}" />       
         
     </Grid>
 </Window>

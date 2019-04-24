@@ -8,5 +8,9 @@ namespace Checkout.VMs.OneTimeUse.CreditCard
 {
     class ExpDate
     {
+        public ExpDate()
+        {
+
+        }
     }
 }

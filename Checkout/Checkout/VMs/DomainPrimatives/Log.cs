@@ -8,6 +8,10 @@ namespace Checkout.VMs.DomainPrimatives
 {
     public class Log
     {
+        public Log()
+        {
+
+        }
         public Log(string message)
         {
             Message = message;

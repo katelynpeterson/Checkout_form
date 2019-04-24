@@ -9,6 +9,11 @@ namespace Checkout.VMs.DomainPrimatives.Product
 {
     public class ProductName
     {
+
+        public ProductName()
+        {
+
+        }
             public ProductName(String s)
             {
                 if (validateProductName(s))

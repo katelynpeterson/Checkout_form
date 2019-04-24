@@ -9,6 +9,10 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class Zip
     {
+        public Zip()
+        {
+
+        }
         public Zip(String s)
         {
             if (validateZip(s))
