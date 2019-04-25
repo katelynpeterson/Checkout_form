@@ -32,6 +32,7 @@ namespace Checkout.VMs
             dataStore = new Checkout.Data.Database("database.db");
 
             ProductList = new ObservableCollection<Product>();
+            Quantities = new ObservableCollection<Quantity>();
             QuantityList = new ObservableCollection<int>();
             //Customer C = new Customer("Joe", "Blow", "123 Anywhere", "Ephraim", "UT", "84627", "Po Box 123", "Ephraim", "UT", "84627", "Joe@Joe.com");
             //dataStore.AddCustomer(C);
@@ -40,17 +41,15 @@ namespace Checkout.VMs
             ProductList.Add (new Product (3, "Australian Safari", 4200.00 ));
             ProductList.Add (new Product (4, "Antarctic Safari", 7100.00 ));
             for (int i = 0; i < ProductList.Count(); i++)
-                QuantityList.Add (4);
+                Quantities.Add(new Quantity("0"));
+                QuantityList.Add (0);
             Total = 0;
-            for (int i = 0; i < ProductList.Count(); i++)
-            {
-                Total += ProductList[i].Cost * QuantityList[i];
-            }
+            
             CustomerBool = false;
             VerifyBool = false;
             FinalBool = false;
-
         }
+
         private double total;
         public double Total
         {
@@ -70,7 +69,10 @@ namespace Checkout.VMs
 
             }
         }
-
+        public ObservableCollection<Quantity> Quantities
+        {
+            get; private set;
+        }
         public ObservableCollection<int> QuantityList
         {
             get; private set;

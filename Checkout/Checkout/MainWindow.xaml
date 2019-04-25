@@ -69,7 +69,7 @@
             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding ProductList[3].Cost}"/>
             <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[3], Mode=TwoWay}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
-            <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total, Mode=TwoWay}"/>
             <Button VerticalAlignment="Center"
                     Width="100"
                     Content="Checkout"
