@@ -52,7 +52,7 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.ColumnSpan="3" FontSize="20" HorizontalAlignment="Center">OUR STORE</TextBlock>
+            <!--<TextBlock Grid.ColumnSpan="3" FontSize="20" HorizontalAlignment="Center">OUR STORE</TextBlock>
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold">Product</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Price</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" FontWeight="Bold">Quantity</TextBlock>
@@ -75,9 +75,9 @@
                     Content="Checkout"
                     Grid.Row="8"
                     Grid.ColumnSpan="3"
-                    Command="{Binding PurchaseCommand}"/>
+                    Command="{Binding PurchaseCommand}"/>-->
         </Grid>
-        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding CustomerBool, Converter={StaticResource BoolToVis}}">
+        <!--<Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding CustomerBool, Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
@@ -171,11 +171,11 @@
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding expMonth}"/>
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding expYear}"/>
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="6" Text="{Binding CVV}"/>
-            <Button Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="6" Content="Submit Purchase" Command="{Binding Submit}"/>
+            <Button Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="6" Content="Submit Purchase" Command="{Binding Submit}"/>-->
 
 
-        </Grid>
-        <ListView ItemsSource="{Binding OrderVM.Lines}">
+        <!--</Grid>-->
+        <!--<ListView ItemsSource="{Binding OrderVM.Lines}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Viewbox>
@@ -189,7 +189,18 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock Text="{Binding Order.Total}" />       
-        
+        <TextBlock Text="{Binding Order.Total}" />-->
+
+        <StackPanel Grid.Column="1"
+            Grid.Row="15">
+            <TextBlock Text="MyName" />
+            <TextBox Text="{Binding MyName}" />
+            <Button Content="AddMyName"
+                    Command="{Binding AddMyNameToDb}" />
+        </StackPanel>
+        <TextBlock Grid.Column="3"
+                   Grid.Row="15"
+                   Text="{Binding MyName}" />
+
     </Grid>
 </Window>

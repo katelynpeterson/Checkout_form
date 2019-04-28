@@ -160,29 +160,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\DTO\CustomerDTO.cs" />
     <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\IDtoStore.cs" />
     <Compile Include="Database\IDataStore.cs" />
     <Compile Include="Database\SimpleCommand.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\MyName.cs" />
     <Compile Include="VMs\CheckoutVM.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\Address.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\City.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\EmailAddress.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\Name.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\State.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\Street.cs" />
-    <Compile Include="VMs\DomainPrimatives\Customer\Zip.cs" />
-    <Compile Include="VMs\DomainPrimatives\Log.cs" />
-    <Compile Include="VMs\DomainPrimatives\Order\Quantity.cs" />
-    <Compile Include="VMs\DomainPrimatives\Product\Price.cs" />
-    <Compile Include="VMs\DomainPrimatives\Product\ProductName.cs" />
-    <Compile Include="VMs\Entity\Customer.cs" />
-    <Compile Include="VMs\Entity\Order.cs" />
-    <Compile Include="VMs\Entity\Product.cs" />
-    <Compile Include="VMs\OneTimeUse\CreditCard\CCardNum.cs" />
-    <Compile Include="VMs\OneTimeUse\CreditCard\CVV.cs" />
-    <Compile Include="VMs\OneTimeUse\CreditCard\ExpDate.cs" />
+    <Compile Include="VMs\DB-VM.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\Address.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\City.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\EmailAddress.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\Name.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\State.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\Street.cs" />
+    <Compile Include="Model\DomainPrimatives\Customer\Zip.cs" />
+    <Compile Include="Model\DomainPrimatives\Log.cs" />
+    <Compile Include="Model\DomainPrimatives\Order\Quantity.cs" />
+    <Compile Include="Model\DomainPrimatives\Product\Price.cs" />
+    <Compile Include="Model\DomainPrimatives\Product\ProductName.cs" />
+    <Compile Include="Model\Entity\Customer.cs" />
+    <Compile Include="Model\Entity\Order.cs" />
+    <Compile Include="Model\Entity\Product.cs" />
+    <Compile Include="Model\OneTimeUse\CreditCard\CCardNum.cs" />
+    <Compile Include="Model\OneTimeUse\CreditCard\CVV.cs" />
+    <Compile Include="Model\OneTimeUse\CreditCard\ExpDate.cs" />
     <Compile Include="VMs\OrderLineVM.cs" />
     <Compile Include="VMs\OrderVM.cs" />
+    <Compile Include="Database\TypeConverterClass.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

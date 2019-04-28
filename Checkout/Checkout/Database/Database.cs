@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Checkout.VMs.Entity;
 using Checkout.VMs.DomainPrimatives;
+using Checkout.Model;
+using Checkout.Database;
+using Checkout.Database.DTO;
 
 namespace Checkout.Data
 {
-    public class Database: IDataStore
+    public class Database: IDtoStore
     {
         private readonly CheckoutContext context;
         private readonly string dbPath;
@@ -17,34 +20,46 @@ namespace Checkout.Data
             context = new CheckoutContext(dbPath);
         }
 
-        public void AddCustomer(Customer c)
+        public void AddMeToDb(MyName myName)
         {
-            context.Customers.Add(c);
-            context.SaveChanges();
+            context.MyName.Add(myName);
+            context.SaveChangesAsync();
         }
 
-        public void PurchaseProduct(Product p)
+        public void AddProduct(Product p)
         {
             context.Products.Add(p);
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public void AddCustomer(CustomerDTO c)
+        {
+            context.Customers.Add(c);
+            context.SaveChangesAsync();
+        }
+
+        //    public void PurchaseProduct(Product p)
+        //    {
+        //        context.Products.Add(p);
+        //        context.SaveChanges();
+        //    }
+
+        public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return context.Customers;
         }
 
-       public void AddLog(Log l)
-        {
-            context.Log.Add(l);
-            context.SaveChanges();
-        }
+        //   public void AddLog(Log l)
+        //    {
+        //        context.Log.Add(l);
+        //        context.SaveChanges();
+        //    }
 
-        public void AddOrder(Order o)
-        {
-            context.Orders.Add(o);
-            context.SaveChanges();
-        }
+        //    public void AddOrder(Order o)
+        //    {
+        //        context.Orders.Add(o);
+        //        context.SaveChanges();
+        //    }
     }
 
     class CheckoutContext : DbContext
@@ -58,6 +73,7 @@ namespace Checkout.Data
             if (!_created)
             {
                 _created = true;
+                Database.EnsureDeleted();
                 Database.EnsureCreated();
             }
         }
@@ -68,13 +84,16 @@ namespace Checkout.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Customer>()
-                //.HasKey(c => c.Id);
+            modelBuilder.Entity<MyName>()
+                .HasKey(c => c.Name);
+            modelBuilder.Entity<Product>().HasKey(p => p.ID);
+            modelBuilder.Entity<CustomerDTO>().HasKey(c => c.Id);
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Log> Log { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<CustomerDTO> Customers { get; set; }
+        //public DbSet<Log> Log { get; set; }
+        //public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<MyName> MyName { get; set; }
     }
 }

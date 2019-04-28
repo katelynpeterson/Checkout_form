@@ -13,12 +13,12 @@ namespace Checkout.VMs.Entity
         {
 
         }
-        public Customer(string firstname, string lastname,
+        public Customer(string id, string firstname, string lastname,
                         string sstreet, string scity, string sstate, string szip,
                         string bstreet, string bcity, string bstate, string bzip,
                         string email)
         {
-            Guid customerID = Guid.NewGuid();
+            Id = id;
 
             Name FirstName = new Name(firstname);
             Name LastName = new Name(lastname);
@@ -29,34 +29,47 @@ namespace Checkout.VMs.Entity
             EmailAddress eMail = new EmailAddress(email);
         }
 
+        private string id;
+        public string Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+
         private Name firstName;
         public Name FirstName
         {
-            get; private set;
+            get { return firstName; }
+            set { firstName = value; }
         }
 
         private Name lastName;
         public Name LastName
         {
-            get; private set;
+            get { return lastName; }
+            set { lastName = value; }
         }
 
         private Address shippingAddress;
         public Address ShippingAddress
         {
-            get; private set;
+            get { return shippingAddress; }
+            set { shippingAddress = value; }
         }
 
         private Address billingAddress;
         public Address BillingAddress
         {
-            get; private set;
+            get { return billingAddress; }
+            set { billingAddress = value; }
         }
 
         private EmailAddress eMail;
         public EmailAddress EMail
         {
-            get; private set;
+            get { return eMail; }
+            set { eMail = value; }
         }
 
 
