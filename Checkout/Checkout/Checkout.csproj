@@ -186,8 +186,6 @@
     <Compile Include="Model\Entity\Order.cs" />
     <Compile Include="Model\Entity\Product.cs" />
     <Compile Include="Model\OneTimeUse\CreditCard\CCardNum.cs" />
-    <Compile Include="Model\OneTimeUse\CreditCard\CVV.cs" />
-    <Compile Include="Model\OneTimeUse\CreditCard\ExpDate.cs" />
     <Compile Include="VMs\OrderLineVM.cs" />
     <Compile Include="VMs\OrderVM.cs" />
     <Compile Include="Database\TypeConverterClass.cs" />
