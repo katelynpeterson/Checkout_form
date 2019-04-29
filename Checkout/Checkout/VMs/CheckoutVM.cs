@@ -25,7 +25,6 @@ namespace Checkout.VMs
         public CheckoutVM(IDataStore dataStore)
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
-            //Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
             ProductList = new ObservableCollection<Product>();
             ProductList.Add(new Product(1, "African Safari", 2000.00));
             ProductList.Add(new Product(2, "Mexico Safari", 1500.00));
@@ -37,6 +36,8 @@ namespace Checkout.VMs
             }
             Customer c = new Customer("10", "joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
             dataStore.AddCustomer(c);
+            Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
+            Products = new ObservableCollection<Product>(DataStore.GetAllProducts());
         }
         public CheckoutVM()
         {
@@ -283,11 +284,12 @@ namespace Checkout.VMs
         //            Customers.Add(c);
         //    }));
 
-        //public ObservableCollection<Customer> Customers { get; private set; }
+        public ObservableCollection<Customer> Customers { get; private set; }
         //public ObservableCollection<Order> OrderList{ get; set;}
         //public ObservableCollection<Order> CustomerOrderList{get;set;}
         //public Product NewProduct { get; private set; }
         public ObservableCollection<Product> ProductList { get; private set; }
+        public ObservableCollection<Product> Products { get; private set; }
         //public ObservableCollection<Quantity> Quantities{ get; private set;}
         //public ObservableCollection<int> QuantityList{get; private set;}
 

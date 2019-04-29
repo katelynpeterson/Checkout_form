@@ -19,8 +19,8 @@ namespace Checkout.VMs.Entity
         public Product(int id, string name, double price)
         {
             ID = id;
-            Description = name;
-           Cost = price;
+            Name = name;
+           Price = price;
 
         }
 
@@ -30,18 +30,18 @@ namespace Checkout.VMs.Entity
             set { SetField(ref _id, value); }
         }
 
-        private string description;
-        public string Description
+        private string name;
+        public string Name
         {
-            get { return description; }
-            set { SetField(ref description, value); }
+            get { return name; }
+            set { SetField(ref name, value); }
         }
         
-        private double cost;
-        public double Cost
+        private double price;
+        public double Price
         {
-            get { return cost; }
-            set { SetField(ref cost, value); }
+            get { return price; }
+            set { SetField(ref price, value); }
         }
 
 

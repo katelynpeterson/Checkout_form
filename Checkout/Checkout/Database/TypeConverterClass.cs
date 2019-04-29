@@ -58,10 +58,20 @@ namespace Checkout.VMs
         {
             var temp = new Checkout.Database.DTO.ProductDTO();
             temp.Id = p.ID;
-            temp.Name = p.Description;
-            temp.Price = p.Cost;
+            temp.Name = p.Name;
+            temp.Price = p.Price;
 
             context.AddProduct(temp);
+        }
+
+        public ObservableCollection<Product> GetAllProducts()
+        {
+            ObservableCollection<Product> list = new ObservableCollection<Product>();
+            foreach (var cur in context.GetAllProducts())
+            {
+                list.Add(new Product(cur.Id, cur.Name, cur.Price));
+            }
+            return list;
         }
 
         public ObservableCollection<Customer> GetAllCustomers()

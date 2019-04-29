@@ -43,16 +43,16 @@ namespace Checkout.Data
             context.SaveChangesAsync();
         }
 
+        public IEnumerable<CustomerDTO> GetAllCustomers()
+        {
+            return context.Customers;
+        }
+
         //    public void PurchaseProduct(Product p)
         //    {
         //        context.Products.Add(p);
         //        context.SaveChanges();
         //    }
-
-        public IEnumerable<CustomerDTO> GetAllCustomers()
-        {
-            return context.Customers;
-        }
 
 
         //   public void AddLog(Log l)

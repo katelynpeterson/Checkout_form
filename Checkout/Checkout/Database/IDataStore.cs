@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Checkout.Database.DTO;
 using Checkout.Model;
@@ -10,12 +11,13 @@ namespace Checkout.Data
 {
     public interface IDataStore
     {
-        void AddCustomer(Customer c);
         //void AddLog(Log l);
         //void AddOrder(Order o);
         //void PurchaseProduct(Product p);
-        //IEnumerable<Customer> GetAllCustomers();
+        void AddCustomer(Customer c);
+        ObservableCollection<Customer> GetAllCustomers();
         void AddProduct(Product p);
+        ObservableCollection<Product> GetAllProducts();
 
         void AddMeToDb(MyName myName);
     }
