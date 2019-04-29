@@ -24,9 +24,11 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 failGracefully();
         }
 
+        private string addressState;
         public string AddressState
         {
-            get; private set;
+            get { return addressState; }
+            private set { addressState = value; }
         }
 
         public Boolean validateState(String s)
@@ -38,7 +40,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 return false;
             }
             // Check characters
-            if (Regex.IsMatch(s, @"^[a-zA-Z] + $"))
+            if (Regex.IsMatch(s, @"^[a-zA-Z]"))
             {
                 return true;
             }

@@ -21,25 +21,29 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         private Street street;
         public Street Street
         {
-            get; private set;
+            get { return street; }
+            private set { street = value; }
         }
 
         private City city;
         public City City
         {
-            get;private set;
+            get { return city; }
+            private set { city = value; }
         }
 
         private State state;
         public State State
         {
-            get; private set;
+            get { return state; }
+            private set { state = value; }
         }
 
         private Zip zip;
         public Zip Zip
         {
-            get; private set;
+            get { return zip; }
+            private set { zip = value; }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 failGracefully();
         }
 
-        private string addressStreet;
+        //private string addressStreet;
         public string AddressStreet
         {
             get; private set;

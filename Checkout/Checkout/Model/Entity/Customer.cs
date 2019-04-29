@@ -20,13 +20,13 @@ namespace Checkout.VMs.Entity
         {
             Id = id;
 
-            Name FirstName = new Name(firstname);
-            Name LastName = new Name(lastname);
+            FirstName = new Name(firstname);
+            LastName = new Name(lastname);
 
-            Address shippingAddress = new Address(sstreet, scity, sstate, szip);
-            Address billingAddress = new Address(bstreet, bcity, bstate, bzip);
+            ShippingAddress = new Address(sstreet, scity, sstate, szip);
+            BillingAddress = new Address(bstreet, bcity, bstate, bzip);
 
-            EmailAddress eMail = new EmailAddress(email);
+            EMail = new EmailAddress(email);
         }
 
         private string id;

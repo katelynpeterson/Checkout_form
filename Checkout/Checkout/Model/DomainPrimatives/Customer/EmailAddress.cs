@@ -29,7 +29,8 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         private string email;
         public string Email
         {
-            get; private set;
+            get { return email; }
+            private set { email = value; }
         }
 
         public Boolean validateEmail(String s)
@@ -42,11 +43,15 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 return false;
             }
             // Check characters
-            if (Regex.IsMatch(s, @"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b"))
+            try
             {
+                var mail = new System.Net.Mail.MailAddress(s);
                 return true;
             }
-            else return false;
+            catch
+            {
+                return false;
+            }
         }
 
         public void failGracefully()

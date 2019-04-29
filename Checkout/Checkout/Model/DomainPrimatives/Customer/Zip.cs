@@ -21,7 +21,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 failGracefully();
         }
 
-        private string addressZip;
+        //private string addressZip;
         public string AddressZip
         {
             get; private set;

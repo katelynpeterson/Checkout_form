@@ -24,7 +24,8 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         private string addressCity;
         public string AddressCity
         {
-            get; private set;
+            get { return addressCity; }
+            private set { addressCity = value; }
         }
 
         public Boolean validateCity(String s)

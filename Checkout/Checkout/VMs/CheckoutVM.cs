@@ -35,8 +35,8 @@ namespace Checkout.VMs
             //{
             //    dataStore.AddProduct(p);
             //}
-            
-            dataStore.AddCustomer(new Customer("10","joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com"));
+            Customer c = new Customer("10", "joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
+            dataStore.AddCustomer(c);
         }
         public CheckoutVM()
         {

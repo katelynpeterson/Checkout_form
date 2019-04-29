@@ -30,7 +30,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         public string NewName
         {
             get { return newName; }
-            set { NewName = value; }
+            set { newName = value; }
         }
 
         public Boolean validateName(String s)
