@@ -26,15 +26,15 @@ namespace Checkout.VMs
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
             //Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
-            //ProductList = new ObservableCollection<Product>();
-            //ProductList.Add(new Product(1, "African Safari", 2000.00));
-            //ProductList.Add(new Product(2, "Mexico Safari", 1500.00));
-            //ProductList.Add(new Product(3, "Australian Safari", 4200.00));
-            //ProductList.Add(new Product(4, "Antarctic Safari", 7100.00));
-            //foreach (var p in ProductList)
-            //{
-            //    dataStore.AddProduct(p);
-            //}
+            ProductList = new ObservableCollection<Product>();
+            ProductList.Add(new Product(1, "African Safari", 2000.00));
+            ProductList.Add(new Product(2, "Mexico Safari", 1500.00));
+            ProductList.Add(new Product(3, "Australian Safari", 4200.00));
+            ProductList.Add(new Product(4, "Antarctic Safari", 7100.00));
+            foreach (var p in ProductList)
+            {
+                dataStore.AddProduct(p);
+            }
             Customer c = new Customer("10", "joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
             dataStore.AddCustomer(c);
         }
@@ -255,9 +255,9 @@ namespace Checkout.VMs
         //                    bZip = c.BillingAddress.Zip.AddressZip;
         //                }
         //            }
-                    
 
-                
+
+
 
         //    }));
 
@@ -287,10 +287,10 @@ namespace Checkout.VMs
         //public ObservableCollection<Order> OrderList{ get; set;}
         //public ObservableCollection<Order> CustomerOrderList{get;set;}
         //public Product NewProduct { get; private set; }
-        //public ObservableCollection<Product> ProductList{ get; private set; }
+        public ObservableCollection<Product> ProductList { get; private set; }
         //public ObservableCollection<Quantity> Quantities{ get; private set;}
         //public ObservableCollection<int> QuantityList{get; private set;}
-               
+
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

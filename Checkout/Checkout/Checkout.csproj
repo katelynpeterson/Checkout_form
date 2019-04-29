@@ -162,6 +162,7 @@
     </ApplicationDefinition>
     <Compile Include="Database\DTO\CustomerDTO.cs" />
     <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\DTO\ProductDTO.cs" />
     <Compile Include="Database\IDtoStore.cs" />
     <Compile Include="Database\IDataStore.cs" />
     <Compile Include="Database\SimpleCommand.cs" />

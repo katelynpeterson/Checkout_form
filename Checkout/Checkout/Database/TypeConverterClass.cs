@@ -56,7 +56,12 @@ namespace Checkout.VMs
 
         public void AddProduct(Product p)
         {
-            throw new NotImplementedException();
+            var temp = new Checkout.Database.DTO.ProductDTO();
+            temp.Id = p.ID;
+            temp.Name = p.Description;
+            temp.Price = p.Cost;
+
+            context.AddProduct(temp);
         }
 
         public ObservableCollection<Customer> GetAllCustomers()

@@ -12,5 +12,7 @@ namespace Checkout.Database
     {
         void AddCustomer(CustomerDTO c);
         IEnumerable<CustomerDTO> GetAllCustomers();
+        void AddProduct(ProductDTO p);
+        IEnumerable<ProductDTO> GetAllProducts();
     }
 }

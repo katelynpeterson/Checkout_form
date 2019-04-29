@@ -26,10 +26,15 @@ namespace Checkout.Data
             context.SaveChangesAsync();
         }
 
-        public void AddProduct(Product p)
+        public void AddProduct(ProductDTO p)
         {
             context.Products.Add(p);
             context.SaveChangesAsync();
+        }
+
+        public IEnumerable<ProductDTO> GetAllProducts()
+        {
+            return context.Products;
         }
 
         public void AddCustomer(CustomerDTO c)
@@ -48,6 +53,7 @@ namespace Checkout.Data
         {
             return context.Customers;
         }
+
 
         //   public void AddLog(Log l)
         //    {
@@ -86,14 +92,14 @@ namespace Checkout.Data
         {
             modelBuilder.Entity<MyName>()
                 .HasKey(c => c.Name);
-            modelBuilder.Entity<Product>().HasKey(p => p.ID);
+            modelBuilder.Entity<ProductDTO>().HasKey(p => p.Id);
             modelBuilder.Entity<CustomerDTO>().HasKey(c => c.Id);
         }
 
         public DbSet<CustomerDTO> Customers { get; set; }
         //public DbSet<Log> Log { get; set; }
         //public DbSet<Order> Orders { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductDTO> Products { get; set; }
         public DbSet<MyName> MyName { get; set; }
     }
 }
