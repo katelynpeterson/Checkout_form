@@ -294,7 +294,7 @@ namespace Checkout.VMs
                     bState,
                     bZip,
                     EmailAddress);
-                dataStore.AddCustomer(c);
+                    dataStore.AddCustomer(c);
                     FinalBool = true;
                     CustomerLock = true;
                 }

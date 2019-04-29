@@ -10,7 +10,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
     {
         public Address() { }
 
-        public Address (string str, string c, string st, string z)
+        public Address(string str, string c, string st, string z)
         {
             Street = new Street(str);
             City = new City(c);

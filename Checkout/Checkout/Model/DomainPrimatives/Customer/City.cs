@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Checkout.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +10,18 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 {
     public class City
     {
+        private FailGracefully failGracefully;
         public City()
         {
 
         }
         public City(String s)
         {
+             failGracefully = new FailGracefully();
             if (validateCity(s))
                 AddressCity = s;
             else
-                failGracefully();
+                failGracefully.Message = "City contains " + CityError;
         }
 
         private string addressCity;
@@ -28,12 +31,21 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             private set { addressCity = value; }
         }
 
+
+        private string cityError;
+        public string CityError
+        {
+            get { return cityError; }
+            set { cityError = value; }
+        }
+
         public Boolean validateCity(String s)
         {
             // Check length
-            if (s.Length > 20)
+            if (s.Length > 20 || s==null || s=="")
             {
                 //Display string to long message
+                CityError = "too many or too few characters";
                 return false;
             }
             // Check characters
@@ -41,12 +53,10 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             {
                 return true;
             }
-            else return false;
+            else {
+                CityError = "invalid characters";
+                return false; }
         }
 
-        public void failGracefully()
-        {
-            return;
-        }
     }
 }

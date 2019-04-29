@@ -166,6 +166,7 @@
     <Compile Include="Database\IDtoStore.cs" />
     <Compile Include="Database\IDataStore.cs" />
     <Compile Include="Database\SimpleCommand.cs" />
+    <Compile Include="Model\FailGracefully.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\MyName.cs" />
     <Compile Include="VMs\CheckoutVM.cs" />
