@@ -39,6 +39,25 @@ namespace Checkout.VMs
             context.AddCustomer(temp);
         }
 
+        public void UpdateCustomer(Customer c)
+        {
+            var temp = new Checkout.Database.DTO.CustomerDTO();
+            //temp.Id = c.Id.ToString();
+            temp.Firstname = c.FirstName.NewName;
+            temp.Lastname = c.LastName.NewName;
+            temp.ShippingStreet = c.ShippingAddress.Street.AddressStreet;
+            temp.ShippingCity = c.ShippingAddress.City.AddressCity;
+            temp.ShippingState = c.ShippingAddress.State.AddressState;
+            temp.ShippingZip = c.ShippingAddress.Zip.AddressZip;
+            temp.BillingStreet = c.BillingAddress.Street.AddressStreet;
+            temp.BillingCity = c.BillingAddress.City.AddressCity;
+            temp.BillingState = c.BillingAddress.State.AddressState;
+            temp.BillingZip = c.BillingAddress.Zip.AddressZip;
+            //temp.EmailAddress = c.EMail.Email;
+
+            context.UpdateCustomer(temp);
+        }
+
         public void AddLog(Log l)
         {
             throw new NotImplementedException();
@@ -79,7 +98,7 @@ namespace Checkout.VMs
             ObservableCollection<Customer> list = new ObservableCollection<Customer>();
             foreach (var cur in context.GetAllCustomers())
             {
-                list.Add(new Customer(cur.Id, cur.Firstname, cur.Lastname, cur.ShippingStreet, cur.ShippingCity,
+                list.Add(new Customer(cur.Firstname, cur.Lastname, cur.ShippingStreet, cur.ShippingCity,
                     cur.ShippingState, cur.ShippingZip, cur.BillingStreet, cur.BillingCity,
                     cur.BillingState, cur.BillingZip, cur.EmailAddress));
             }

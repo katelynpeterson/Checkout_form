@@ -11,6 +11,7 @@ namespace Checkout.Database
     public interface IDtoStore
     {
         void AddCustomer(CustomerDTO c);
+        void UpdateCustomer(CustomerDTO c);
         IEnumerable<CustomerDTO> GetAllCustomers();
         IEnumerable<CustomerDTO> GetCustomerByEmail(string email);
         void AddProduct(ProductDTO p);

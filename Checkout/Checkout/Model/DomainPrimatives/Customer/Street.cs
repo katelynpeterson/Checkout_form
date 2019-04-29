@@ -21,10 +21,11 @@ namespace Checkout.VMs.DomainPrimatives.Customer
                 failGracefully();
         }
 
-        //private string addressStreet;
+        private string addressStreet;
         public string AddressStreet
         {
-            get; private set;
+            get { return addressStreet; }
+            private set { addressStreet = value; }
         }
 
         public Boolean validateStreet(String s)

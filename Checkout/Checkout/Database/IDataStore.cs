@@ -15,6 +15,7 @@ namespace Checkout.Data
         //void AddOrder(Order o);
         //void PurchaseProduct(Product p);
         void AddCustomer(Customer c);
+        void UpdateCustomer(Customer c);
         ObservableCollection<Customer> GetAllCustomers();
         ObservableCollection<Customer> GetCustomerByEmail(string email);
         void AddProduct(Product p);

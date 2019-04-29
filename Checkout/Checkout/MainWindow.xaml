@@ -122,30 +122,35 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <TextBlock Grid.ColumnSpan="2" VerticalAlignment="Center" Text="  First Name"/>
-            <TextBox Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="{Binding FirstName}"/>
+            <TextBox IsReadOnly="{Binding CustomerLock}" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="{Binding FirstName}"/>
             <TextBlock Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Center"  Text="  Last Name"/>
-            <TextBox Grid.Column="7" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="{Binding LastName}"/>
+            <TextBox IsReadOnly="{Binding CustomerLock}" Grid.Column="7" Grid.ColumnSpan="3" VerticalAlignment="Center" Text="{Binding LastName}"/>
             <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="5" Grid.Row="1" Text="  Shipping Address:" FontWeight="Bold"/>
             <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2" Text="  Street:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.Row="2" Grid.Column="2" Text="{Binding sStreet}"/>
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.Row="2" Grid.Column="2" Text="{Binding sStreet}"/>
             <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Text="  City:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="2" Text="{Binding sCity}" />
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="2" Text="{Binding sCity}" />
             <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Center"  Text="  State:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="3" Grid.Column="6" Text="{Binding sState}" />
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="3" Grid.Column="6" Text="{Binding sState}" />
             <TextBlock Grid.Column="7" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="3" Text="  Zip:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="8" Text="{Binding sZip}" />
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="8" Text="{Binding sZip}" />
             
             <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="5" Grid.Row="4" Text="  Billing Address:" FontWeight="Bold"/>
             <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="5" Text="  Street:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.Row="5" Grid.Column="2" Text="{Binding bStreet}"/>
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="8" Grid.Row="5" Grid.Column="2" Text="{Binding bStreet}"/>
             <TextBlock VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Text="  City:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="2" Text="{Binding bCity}"/>
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="2" Text="{Binding bCity}"/>
             <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Center"  Text="  State:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="6" Grid.Column="6" Text="{Binding bState}" />
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="6" Grid.Column="6" Text="{Binding bState}" />
             <TextBlock Grid.Column="7" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.Row="6" Text="  Zip:" />
-            <TextBox VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="8" Text="{Binding bZip}"/>
+            <TextBox IsReadOnly="{Binding CustomerLock}" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="8" Text="{Binding bZip}"/>
 
-            <Button VerticalAlignment="Center" Width="150" Content="Update/Add" Grid.Row="8" Grid.ColumnSpan="10" Command="{Binding Update}"/>
+            <Button VerticalAlignment="Center"
+                    Width="150"
+                    Content="Update/Add"
+                    Grid.Row="8"
+                    Grid.ColumnSpan="10"
+                    Command="{Binding AddCustomerCommand}"/>
         </Grid>
         <Grid Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="11" Grid.RowSpan="3" Background="PaleTurquoise" Visibility="{Binding FinalBool,Converter={StaticResource BoolToVis}}">
             <Grid.ColumnDefinitions>

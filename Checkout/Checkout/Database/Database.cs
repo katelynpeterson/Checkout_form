@@ -44,6 +44,12 @@ namespace Checkout.Data
             context.SaveChangesAsync();
         }
 
+        public void UpdateCustomer(CustomerDTO c)
+        {
+            context.Update(c);
+            context.SaveChangesAsync();
+        }
+
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return context.Customers;
@@ -54,6 +60,7 @@ namespace Checkout.Data
             return context.Customers.Where(x=>x.EmailAddress.Equals(email));
             
         }
+
 
         //    public void PurchaseProduct(Product p)
         //    {
@@ -86,7 +93,7 @@ namespace Checkout.Data
             if (!_created)
             {
                 _created = true;
-                Database.EnsureDeleted();
+                //Database.EnsureDeleted();
                 Database.EnsureCreated();
             }
         }

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Checkout.VMs.DomainPrimatives;
 using Checkout.VMs.DomainPrimatives.Order;
 using Checkout.Model;
+using Checkout.VMs.DomainPrimatives.Customer;
 
 namespace Checkout.VMs
 {
@@ -25,23 +26,24 @@ namespace Checkout.VMs
         public CheckoutVM(IDataStore dataStore)
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
-            ProductList = new ObservableCollection<Product>();
-            ProductList.Add(new Product(1, "African Safari", 2000.00));
-            ProductList.Add(new Product(2, "Mexico Safari", 1500.00));
-            ProductList.Add(new Product(3, "Australian Safari", 4200.00));
-            ProductList.Add(new Product(4, "Antarctic Safari", 7100.00));
-            foreach (var p in ProductList)
-            {
-                dataStore.AddProduct(p);
-            }
-            Customer c = new Customer("10", "joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
-            dataStore.AddCustomer(c);
+            //ProductList = new ObservableCollection<Product>();
+            //ProductList.Add(new Product(1, "African Safari", 2000.00));
+            //ProductList.Add(new Product(2, "Mexico Safari", 1500.00));
+            //ProductList.Add(new Product(3, "Australian Safari", 4200.00));
+            //ProductList.Add(new Product(4, "Antarctic Safari", 7100.00));
+            //foreach (var p in ProductList)
+            //{
+            //    dataStore.AddProduct(p);
+            //}
+            //Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
+            //dataStore.AddCustomer(c);
             Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
             Products = new ObservableCollection<Product>(DataStore.GetAllProducts());
             SelectedCustomer = new ObservableCollection<Customer>();
             CustomerBool = false;
             VerifyBool = false;
             FinalBool = false;
+            CustomerLock = false;
         }
         public CheckoutVM()
         {
@@ -91,6 +93,13 @@ namespace Checkout.VMs
         {
             get { return emailLock; }
             set { SetField(ref emailLock, value); }
+        }
+
+        private bool customerLock;
+        public bool CustomerLock
+        {
+            get { return customerLock; }
+            set { SetField(ref customerLock, value); }
         }
 
         private string myName;
@@ -220,8 +229,8 @@ namespace Checkout.VMs
             {
                 OrderLock = true;
                 CustomerBool = true;
-                ObservableCollection<Product> tempP = new ObservableCollection<Product>();
-                ObservableCollection<int> tempQ = new ObservableCollection<int>();
+                //ObservableCollection<Product> tempP = new ObservableCollection<Product>();
+                //ObservableCollection<int> tempQ = new ObservableCollection<int>();
                 //for (int i = 0; i < QuantityList.Count(); i++)
                 //{
                 //    if (QuantityList[i] > 0)
@@ -238,54 +247,73 @@ namespace Checkout.VMs
         public ICommand SearchCommand => searchCommand ?? (searchCommand = new SimpleCommand(
             () =>
             {
-            if (EmailAddress == null)
-            { return;
-            }
-            //DomainPrimatives.Customer.EmailAddress email = new DomainPrimatives.Customer.EmailAddress(EmailAddress);
-            VerifyBool = true;
-            EmailLock = true;
-                SelectedCustomer = dataStore.GetCustomerByEmail(EmailAddress);
-
-                //ObservableCollection<Customer> temp = new ObservableCollection<Customer>();
-                foreach (var c in SelectedCustomer)
-            {
-                    //    if (c.EMail == email)
-                    //    {
-                    FirstName = c.FirstName.NewName;
-                    LastName = c.LastName.NewName;
-                    sStreet = c.ShippingAddress.Street.AddressStreet;
-                    sCity = c.ShippingAddress.City.AddressCity;
-                    sState = c.ShippingAddress.State.AddressState;
-                    sZip = c.ShippingAddress.Zip.AddressZip;
-                    bStreet = c.BillingAddress.Street.AddressStreet;
-                    bCity = c.BillingAddress.City.AddressCity;
-                    bState = c.BillingAddress.State.AddressState;
-                    bZip = c.BillingAddress.Zip.AddressZip;
-                    //    }
+                if (EmailAddress == null)
+                {
+                    return;
                 }
+                VerifyBool = true;
+                EmailLock = true;
+                SelectedCustomer = dataStore.GetCustomerByEmail(EmailAddress);
+                if (SelectedCustomer.Count != 0)
+                {
+                    foreach (var c in SelectedCustomer)
+                    {
+                        FirstName = c.FirstName.NewName;
+                        LastName = c.LastName.NewName;
+                        sStreet = c.ShippingAddress.Street.AddressStreet;
+                        sCity = c.ShippingAddress.City.AddressCity;
+                        sState = c.ShippingAddress.State.AddressState;
+                        sZip = c.ShippingAddress.Zip.AddressZip;
+                        bStreet = c.BillingAddress.Street.AddressStreet;
+                        bCity = c.BillingAddress.City.AddressCity;
+                        bState = c.BillingAddress.State.AddressState;
+                        bZip = c.BillingAddress.Zip.AddressZip;
+                    }
+                }
+                else
+                    IsNewCustomer = true;
             }));
 
 
-        //private ICommand addCustomerCommand;
-        //public ICommand AddCustomerCommand =>addCustomerCommand ?? (addCustomerCommand = new SimpleCommand(
-        //    () =>
-        //    {
-        //        DataStore.AddCustomer(new Customer(
-        //            FirstName,
-        //            LastName,
-        //            sStreet,
-        //            sCity,
-        //            sState,
-        //            sZip,
-        //            bStreet,
-        //            bCity,
-        //            bState,
-        //            bZip,
-        //            EmailAddress));
-        //        Customers.Clear();
-        //        foreach (var c in DataStore.GetAllCustomers())
-        //            Customers.Add(c);
-        //    }));
+        private ICommand addCustomerCommand;
+        public ICommand AddCustomerCommand => addCustomerCommand ?? (addCustomerCommand = new SimpleCommand(
+            () =>
+            {
+                //add new customer
+                if (IsNewCustomer == true)
+                {
+                    Customer c = new Customer(
+                    FirstName,
+                    LastName,
+                    sStreet,
+                    sCity,
+                    sState,
+                    sZip,
+                    bStreet,
+                    bCity,
+                    bState,
+                    bZip,
+                    EmailAddress);
+                dataStore.AddCustomer(c);
+                    FinalBool = true;
+                    CustomerLock = true;
+                }
+                //update existing customer
+                else
+                {
+                    //foreach (var c in SelectedCustomer)
+                    //{
+                    //    c.FirstName = new Name(FirstName);
+                    //    c.LastName = new Name(LastName);
+                    //    c.ShippingAddress = new Address(sStreet,sCity,sState, sZip);
+                    //    c.BillingAddress =new Address(bStreet, bCity, bState, bZip);
+                    //dataStore.UpdateCustomer(c);
+                    //}
+                    FinalBool = true;
+                    CustomerLock = true;
+                }
+                
+            }));
 
         public ObservableCollection<Customer> Customers { get; private set; }
         public ObservableCollection<Customer> SelectedCustomer { get; private set; }
