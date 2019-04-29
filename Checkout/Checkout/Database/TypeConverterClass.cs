@@ -86,6 +86,23 @@ namespace Checkout.VMs
             return list;
         }
 
+        public ObservableCollection<Customer> GetCustomerByEmail(string email)
+        {
+
+            ObservableCollection<Customer> list = new ObservableCollection<Customer>();
+            //var temp = new Checkout.Database.DTO.CustomerDTO();
+            //temp.EmailAddress = email;
+            foreach (var cur in context.GetCustomerByEmail(email))
+            {
+
+                list.Add(new Customer(cur.Id, cur.Firstname, cur.Lastname, cur.ShippingStreet, cur.ShippingCity,
+                    cur.ShippingState, cur.ShippingZip, cur.BillingStreet, cur.BillingCity,
+                    cur.BillingState, cur.BillingZip, cur.EmailAddress));
+            }
+            return list;
+
+        }
+
         public void PurchaseProduct(Product p)
         {
             throw new NotImplementedException();

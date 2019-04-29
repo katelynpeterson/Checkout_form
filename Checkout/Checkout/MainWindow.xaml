@@ -70,14 +70,14 @@
             <!--<TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[3], Mode=TwoWay}"/>-->
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
             <!--<TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total, Mode=TwoWay}"/>-->
-            <!--<Button VerticalAlignment="Center"
+            <Button VerticalAlignment="Center"
                     Width="100"
                     Content="Checkout"
                     Grid.Row="8"
                     Grid.ColumnSpan="3"
-                    Command="{Binding PurchaseCommand}"/>-->
+                    Command="{Binding PurchaseCommand}"/>
         </Grid>
-        <!--<Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding CustomerBool, Converter={StaticResource BoolToVis}}">
+        <Grid Grid.Column="3" Grid.ColumnSpan="3" Background="PaleTurquoise" Visibility="{Binding CustomerBool, Converter={StaticResource BoolToVis}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
@@ -171,10 +171,10 @@
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding expMonth}"/>
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding expYear}"/>
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="6" Text="{Binding CVV}"/>
-            <Button Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="6" Content="Submit Purchase" Command="{Binding Submit}"/>-->
+            <Button Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="6" Content="Submit Purchase" Command="{Binding Submit}"/>
 
 
-        <!--</Grid>-->
+        </Grid>
         <StackPanel Grid.Column="4"
                     Grid.Row="15">
                         <StackPanel Orientation="Horizontal">

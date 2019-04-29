@@ -38,6 +38,10 @@ namespace Checkout.VMs
             dataStore.AddCustomer(c);
             Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
             Products = new ObservableCollection<Product>(DataStore.GetAllProducts());
+            SelectedCustomer = new ObservableCollection<Customer>();
+            CustomerBool = false;
+            VerifyBool = false;
+            FinalBool = false;
         }
         public CheckoutVM()
         {
@@ -50,33 +54,44 @@ namespace Checkout.VMs
             //    QuantityList.Add (0);
             //Total = 0;
 
-            //CustomerBool = false;
-            //VerifyBool = false;
-            //FinalBool = false;
         }
 
-    
-
-        //private bool customerBool;
-        //public bool CustomerBool
-        //{
-        //    get { return customerBool; }
-        //    set { SetField(ref customerBool, value); }
-        //}
-        //private bool verifyBool;
-        //public bool VerifyBool
-        //{
-        //    get { return verifyBool; }
-        //    set { SetField(ref verifyBool, value); }
-        //}
-        //private bool finalBool;
-        //public bool FinalBool
-        //{
-        //    get { return finalBool; }
-        //    set { SetField(ref finalBool, value); }
-        //}
 
 
+        private bool customerBool;
+        public bool CustomerBool
+        {
+            get { return customerBool; }
+            set { SetField(ref customerBool, value); }
+        }
+
+        private bool verifyBool;
+        public bool VerifyBool
+        {
+            get { return verifyBool; }
+            set { SetField(ref verifyBool, value); }
+        }
+        private bool finalBool;
+        public bool FinalBool
+        {
+            get { return finalBool; }
+            set { SetField(ref finalBool, value); }
+        }
+
+        private bool orderLock;
+        public bool OrderLock
+        {
+            get { return orderLock; }
+            set { SetField(ref orderLock, value); }
+        }
+
+        
+        private bool emailLock;
+        public bool EmailLock
+        {
+            get { return emailLock; }
+            set { SetField(ref emailLock, value); }
+        }
 
         private string myName;
         public string MyName
@@ -106,102 +121,89 @@ namespace Checkout.VMs
 
         //    }}
 
-        //private string firstname;
-        //public string FirstName
-        //{
-        //    get { return firstname; }
-        //    set { SetField(ref firstname, value); }
-        //}
+        private string firstname;
+        public string FirstName
+        {
+            get { return firstname; }
+            set { SetField(ref firstname, value); }
+        }
 
-        //private string lastname;
-        //public string LastName
-        //{
-        //    get { return lastname; }
-        //    set { SetField(ref lastname, value); }
-        //}
+        private string lastname;
+        public string LastName
+        {
+            get { return lastname; }
+            set { SetField(ref lastname, value); }
+        }
 
-        //private string shippingStreet;
-        //public string sStreet
-        //{
-        //    get { return shippingStreet; }
-        //    set { SetField(ref shippingStreet, value); }
-        //}
+        private string shippingStreet;
+        public string sStreet
+        {
+            get { return shippingStreet; }
+            set { SetField(ref shippingStreet, value); }
+        }
 
-        //private string shippingCity;
-        //public string sCity
-        //{
-        //    get { return shippingCity; }
-        //    set { SetField(ref shippingCity, value); }
-        //}
+        private string shippingCity;
+        public string sCity
+        {
+            get { return shippingCity; }
+            set { SetField(ref shippingCity, value); }
+        }
 
-        //private string shippingState;
-        //public string sState
-        //{
-        //    get { return shippingState; }
-        //    set { SetField(ref shippingState, value); }
-        //}
+        private string shippingState;
+        public string sState
+        {
+            get { return shippingState; }
+            set { SetField(ref shippingState, value); }
+        }
 
-        //private string shippingZip;
-        //public string sZip
-        //{
-        //    get { return shippingZip; }
-        //    set { SetField(ref shippingZip, value); }
-        //}
+        private string shippingZip;
+        public string sZip
+        {
+            get { return shippingZip; }
+            set { SetField(ref shippingZip, value); }
+        }
 
-        //private string billingStreet;
-        //public string bStreet
-        //{
-        //    get { return billingStreet; }
-        //    set { SetField(ref billingStreet, value); }
-        //}
+        private string billingStreet;
+        public string bStreet
+        {
+            get { return billingStreet; }
+            set { SetField(ref billingStreet, value); }
+        }
 
-        //private string billingCity;
-        //public string bCity
-        //{
-        //    get { return billingCity; }
-        //    set { SetField(ref billingCity, value); }
-        //}
+        private string billingCity;
+        public string bCity
+        {
+            get { return billingCity; }
+            set { SetField(ref billingCity, value); }
+        }
 
-        //private string billingState;
-        //public string bState
-        //{
-        //    get { return billingState; }
-        //    set { SetField(ref billingState, value); }
-        //}
+        private string billingState;
+        public string bState
+        {
+            get { return billingState; }
+            set { SetField(ref billingState, value); }
+        }
 
-        //private string billingZip;
-        //public string bZip
-        //{
-        //    get { return billingZip; }
-        //    set { SetField(ref billingZip, value); }
-        //}
+        private string billingZip;
+        public string bZip
+        {
+            get { return billingZip; }
+            set { SetField(ref billingZip, value); }
+        }
 
-        //private bool isNewCustomer;
-        //public bool IsNewCustomer
-        //{
-        //    get { return isNewCustomer; }
-        //    set { SetField(ref isNewCustomer, value); }
-        //}
+        private bool isNewCustomer;
+        public bool IsNewCustomer
+        {
+            get { return isNewCustomer; }
+            set { SetField(ref isNewCustomer, value); }
+        }
 
-        //private string emailAddress;
-        //public string EmailAddress
-        //{
-        //    get { return emailAddress; }
-        //    set { SetField(ref emailAddress, value); }
-        //}
-        //private bool emailLock;
-        //public bool EmailLock
-        //{
-        //    get { return emailLock; }
-        //    set { SetField(ref emailLock, value); }
-        //}
-
-        //private bool orderLock;
-        //public bool OrderLock
-        //{
-        //    get { return orderLock; }
-        //    set { SetField(ref orderLock, value); }
-        //}
+        private string emailAddress;
+        public string EmailAddress
+        {
+            get { return emailAddress; }
+            set { SetField(ref emailAddress, value); }
+        }
 
         private ICommand addMyNameToDb;
         public ICommand AddMyNameToDb=> addMyNameToDb ??(addMyNameToDb = new SimpleCommand(
@@ -212,55 +214,56 @@ namespace Checkout.VMs
         }));
 
 
-        //private ICommand purchaseCommand;
-        //public ICommand PurchaseCommand => purchaseCommand ?? (purchaseCommand = new SimpleCommand(
-        //    () =>
-        //    {
-        //        OrderLock = true;
-        //        CustomerBool = true;
-        //        ObservableCollection<Product> tempP = new ObservableCollection<Product>();
-        //        ObservableCollection<int> tempQ = new ObservableCollection<int>();
-        //       for (int i = 0; i< QuantityList.Count(); i++)
-        //        {
-        //            if (QuantityList[i] > 0)
-        //            {
-        //                tempP.Add(ProductList[i]);
-        //                tempQ.Add(QuantityList[i]);
-        //            }
-        //        }
-        //       //DataStore.AddLog(new Log("Order Created"));
-        //       Order CustomerOrder = new Order(tempP, tempQ);
-        //    }));
-        //private ICommand searchCommand;
-        //public ICommand SearchCommand => searchCommand ?? (searchCommand = new SimpleCommand(
-        //    () =>
-        //    {   if(EmailAddress == null)
-        //            { return; }
-        //        DomainPrimatives.Customer.EmailAddress email = new DomainPrimatives.Customer.EmailAddress(EmailAddress);
-        //        VerifyBool = true;
-        //        EmailLock = true;
-        //        ObservableCollection<Customer> temp = new ObservableCollection<Customer>();
-        //            foreach (var c in DataStore.GetAllCustomers())
-        //            {
-        //                if (c.EMail == email)
-        //                {
-        //                    FirstName = c.FirstName.NewName;
-        //                    LastName = c.LastName.NewName;
-        //                    sStreet = c.ShippingAddress.Street.AddressStreet;
-        //                    sCity = c.ShippingAddress.City.AddressCity;
-        //                    sState = c.ShippingAddress.State.AddressState;
-        //                    sZip = c.ShippingAddress.Zip.AddressZip;
-        //                    bStreet = c.BillingAddress.Street.AddressStreet;
-        //                    bCity = c.BillingAddress.City.AddressCity;
-        //                    bState = c.BillingAddress.State.AddressState;
-        //                    bZip = c.BillingAddress.Zip.AddressZip;
-        //                }
-        //            }
+        private ICommand purchaseCommand;
+        public ICommand PurchaseCommand => purchaseCommand ?? (purchaseCommand = new SimpleCommand(
+            () =>
+            {
+                OrderLock = true;
+                CustomerBool = true;
+                ObservableCollection<Product> tempP = new ObservableCollection<Product>();
+                ObservableCollection<int> tempQ = new ObservableCollection<int>();
+                //for (int i = 0; i < QuantityList.Count(); i++)
+                //{
+                //    if (QuantityList[i] > 0)
+                //    {
+                //        tempP.Add(ProductList[i]);
+                //        tempQ.Add(QuantityList[i]);
+                //    }
+                //}
+                //DataStore.AddLog(new Log("Order Created"));
+                //Order CustomerOrder = new Order(tempP, tempQ);
+            }));
 
+        private ICommand searchCommand;
+        public ICommand SearchCommand => searchCommand ?? (searchCommand = new SimpleCommand(
+            () =>
+            {
+            if (EmailAddress == null)
+            { return;
+            }
+            //DomainPrimatives.Customer.EmailAddress email = new DomainPrimatives.Customer.EmailAddress(EmailAddress);
+            VerifyBool = true;
+            EmailLock = true;
+                SelectedCustomer = dataStore.GetCustomerByEmail(EmailAddress);
 
-
-
-        //    }));
+                //ObservableCollection<Customer> temp = new ObservableCollection<Customer>();
+                foreach (var c in SelectedCustomer)
+            {
+                    //    if (c.EMail == email)
+                    //    {
+                    FirstName = c.FirstName.NewName;
+                    LastName = c.LastName.NewName;
+                    sStreet = c.ShippingAddress.Street.AddressStreet;
+                    sCity = c.ShippingAddress.City.AddressCity;
+                    sState = c.ShippingAddress.State.AddressState;
+                    sZip = c.ShippingAddress.Zip.AddressZip;
+                    bStreet = c.BillingAddress.Street.AddressStreet;
+                    bCity = c.BillingAddress.City.AddressCity;
+                    bState = c.BillingAddress.State.AddressState;
+                    bZip = c.BillingAddress.Zip.AddressZip;
+                    //    }
+                }
+            }));
 
 
         //private ICommand addCustomerCommand;
@@ -285,6 +288,7 @@ namespace Checkout.VMs
         //    }));
 
         public ObservableCollection<Customer> Customers { get; private set; }
+        public ObservableCollection<Customer> SelectedCustomer { get; private set; }
         //public ObservableCollection<Order> OrderList{ get; set;}
         //public ObservableCollection<Order> CustomerOrderList{get;set;}
         //public Product NewProduct { get; private set; }

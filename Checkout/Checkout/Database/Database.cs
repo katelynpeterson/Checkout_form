@@ -6,6 +6,7 @@ using Checkout.VMs.DomainPrimatives;
 using Checkout.Model;
 using Checkout.Database;
 using Checkout.Database.DTO;
+using System.Linq;
 
 namespace Checkout.Data
 {
@@ -46,6 +47,12 @@ namespace Checkout.Data
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return context.Customers;
+        }
+
+        public IEnumerable<CustomerDTO> GetCustomerByEmail(string email)
+        {
+            return context.Customers.Where(x=>x.EmailAddress.Equals(email));
+            
         }
 
         //    public void PurchaseProduct(Product p)
