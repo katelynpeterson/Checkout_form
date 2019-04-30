@@ -43,7 +43,7 @@ namespace Checkout.VMs.DomainPrimatives.Order
         public Boolean validateQuantity(int i)
         {
             // Check value range of quantity
-            if (i < 0 || i > 9)
+            if (i < 0 || i > 50)
             {
             throw new Exception("Quantity must be postive and less than 10");
             }
