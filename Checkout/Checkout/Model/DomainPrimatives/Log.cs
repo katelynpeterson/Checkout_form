@@ -21,7 +21,8 @@ namespace Checkout.VMs.DomainPrimatives
         private string message;
         public string Message
         {
-            get;private set;
+            get { return message; }
+            private set { message = value; }
         }
 
         private DateTime dateStamp;

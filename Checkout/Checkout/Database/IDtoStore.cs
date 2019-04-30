@@ -10,6 +10,7 @@ namespace Checkout.Database
 {
     public interface IDtoStore
     {
+        void AddLog(LogDTO l);
         void AddCustomer(CustomerDTO c);
         void UpdateCustomer(CustomerDTO c);
         IEnumerable<CustomerDTO> GetAllCustomers();

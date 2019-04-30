@@ -11,7 +11,8 @@ namespace Checkout.Data
 {
     public interface IDataStore
     {
-        //void AddLog(Log l);
+        void AddLog(Log l);
+
         //void AddOrder(Order o);
         //void PurchaseProduct(Product p);
         void AddCustomer(Customer c);

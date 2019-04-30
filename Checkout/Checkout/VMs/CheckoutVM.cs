@@ -29,17 +29,17 @@ namespace Checkout.VMs
         public CheckoutVM(IDataStore dataStore)
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
-            //ProductList = new ObservableCollection<Product>();
-            //ProductList.Add(new Product(1, "African Safari", 2000.00,0));
-            //ProductList.Add(new Product(2, "Mexico Safari", 1500.00,0));
-            //ProductList.Add(new Product(3, "Australian Safari", 4200.00,0));
-            //ProductList.Add(new Product(4, "Antarctic Safari", 7100.00,0));
-            //foreach (var p in ProductList)
-            //{
-            //    dataStore.AddProduct(p);
-            //}
-            //Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
-            //dataStore.AddCustomer(c);
+            ProductList = new ObservableCollection<Product>();
+            ProductList.Add(new Product(1, "African Safari", 2000.00, 0));
+            ProductList.Add(new Product(2, "Mexico Safari", 1500.00, 0));
+            ProductList.Add(new Product(3, "Australian Safari", 4200.00, 0));
+            ProductList.Add(new Product(4, "Antarctic Safari", 7100.00, 0));
+            foreach (var p in ProductList)
+            {
+                dataStore.AddProduct(p);
+            }
+            Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
+            dataStore.AddCustomer(c);
             Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
             Products = new ObservableCollection<Product>(DataStore.GetAllProducts());
             SelectedCustomer = new ObservableCollection<Customer>();
@@ -274,8 +274,11 @@ namespace Checkout.VMs
                     }
                     OrderLock = true;
                     CustomerBool = true;
+                    dataStore.AddLog(new Log("Completed Order"));
                 }
-                catch (Exception e) { MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error); }
+                catch (Exception e) {
+                    dataStore.AddLog(new Log(e.Message));
+                    MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error); }
                 
             }));
 
@@ -316,10 +319,11 @@ namespace Checkout.VMs
                         }
                         else
                             IsNewCustomer = true;
-
+                        dataStore.AddLog(new Log("Looked up Customer"));
                     }
                     catch (Exception e)
                     {
+                        dataStore.AddLog(new Log(e.Message));
                         MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
@@ -350,9 +354,11 @@ namespace Checkout.VMs
                         dataStore.AddCustomer(c);
                         FinalBool = true;
                         CustomerLock = true;
+                    dataStore.AddLog(new Log("Successfully Created new Customer"));
                     }
                     catch (Exception e)
                     {
+                        dataStore.AddLog(new Log(e.Message));
                         MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
@@ -386,9 +392,12 @@ namespace Checkout.VMs
                     {
                         //display order
                         MessageBox.Show("Your order was created successfully:)", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        dataStore.AddLog(new Log("Transaction Completed"));
                     }
                 }
-                catch (Exception e) { MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error); }
+                catch (Exception e) {
+                    dataStore.AddLog(new Log(e.Message));
+                    MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error); }
             }));
 
 
@@ -398,7 +407,7 @@ namespace Checkout.VMs
         //public ObservableCollection<Order> OrderList{ get; set;}
         //public ObservableCollection<Order> CustomerOrderList{get;set;}
         //public Product NewProduct { get; private set; }
-        //public ObservableCollection<Product> ProductList { get; private set; }
+        public ObservableCollection<Product> ProductList { get; private set; }
         //public ObservableCollection<Quantity> Quantities { get; private set; }
         //public ObservableCollection<int> QuantityList { get; private set; }
 

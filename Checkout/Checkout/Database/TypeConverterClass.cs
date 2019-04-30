@@ -60,7 +60,9 @@ namespace Checkout.VMs
 
         public void AddLog(Log l)
         {
-            throw new NotImplementedException();
+            var temp = new Checkout.Database.DTO.LogDTO();
+            temp.DateStamp = l.DateStamp;
+            temp.Message = l.Message;
         }
 
         public void AddMeToDb(MyName myName)

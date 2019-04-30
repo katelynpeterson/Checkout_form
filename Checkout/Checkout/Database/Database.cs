@@ -69,17 +69,12 @@ namespace Checkout.Data
         //    }
 
 
-        //   public void AddLog(Log l)
-        //    {
-        //        context.Log.Add(l);
-        //        context.SaveChanges();
-        //    }
+        public void AddLog(LogDTO l)
+        {
+            context.Log.Add(l);
+            context.SaveChanges();
+        }
 
-        //    public void AddOrder(Order o)
-        //    {
-        //        context.Orders.Add(o);
-        //        context.SaveChanges();
-        //    }
     }
 
     class CheckoutContext : DbContext
@@ -93,7 +88,7 @@ namespace Checkout.Data
             if (!_created)
             {
                 _created = true;
-                //Database.EnsureDeleted();
+                Database.EnsureDeleted();
                 Database.EnsureCreated();
             }
         }
@@ -108,12 +103,13 @@ namespace Checkout.Data
                 .HasKey(c => c.Name);
             modelBuilder.Entity<ProductDTO>().HasKey(p => p.Id);
             modelBuilder.Entity<CustomerDTO>().HasKey(c => c.Id);
+            modelBuilder.Entity<LogDTO>().HasKey(l => l.DateStamp);
         }
 
         public DbSet<CustomerDTO> Customers { get; set; }
         public DbSet<ProductDTO> Products { get; set; }
         public DbSet<MyName> MyName { get; set; }
-        //public DbSet<Log> Log { get; set; }
+        public DbSet<LogDTO> Log { get; set; }
         //public DbSet<Order> Orders { get; set; }
     }
 }
