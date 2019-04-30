@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Checkout.Model
 {
-    public class FailGracefully
+    public class FailGracefully : System.Exception
     {
         public FailGracefully()
         {
@@ -22,7 +22,7 @@ namespace Checkout.Model
                 //log message
             }
             else
-                throw new ArgumentOutOfRangeException();
+                throw new FailGracefully(Message);
         }
 
         private string message;

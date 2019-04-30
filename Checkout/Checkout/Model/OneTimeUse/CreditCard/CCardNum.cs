@@ -25,28 +25,28 @@ namespace Checkout.VMs.OneTimeUse.CreditCard
         public Boolean validateMonth(int month)
         {
             if (month < 1 || month > 12)
-                return false;
+                throw new Exception("Invalid Month");
             return true;
         }
 
         public Boolean validateYear(int year)
         {
             if (year > 2030 || year < 2019)
-                return false;
+                throw new Exception("Invalid Year");
             return true;
         }
         public Boolean validateCC(long num)
         {
             if (num.ToString().Length != 16)
-                return false;
+                throw new Exception("Invalid Card Number");
             if (luhnAlgorithm(num))
                 return true;
-            return false;
+            throw new Exception("Invalid Card Number");
         }
         public Boolean validateCVV(int num)
         {
-            if (num.ToString().Length != 3 || num.ToString().Length != 4)
-                return false;
+            if (num < 100 || num > 9999)
+                throw new Exception("Invalid CVV Number");
             return true;
         }
 

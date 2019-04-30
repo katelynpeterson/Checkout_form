@@ -21,7 +21,11 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             if (validateCity(s))
                 AddressCity = s;
             else
+            {
                 failGracefully.Message = "City contains " + CityError;
+            throw new Exception(failGracefully.Message);
+
+            }
         }
 
         private string addressCity;

@@ -14,6 +14,8 @@ using Checkout.VMs.DomainPrimatives;
 using Checkout.VMs.DomainPrimatives.Order;
 using Checkout.Model;
 using Checkout.VMs.DomainPrimatives.Customer;
+using System.Windows;
+using Checkout.VMs.OneTimeUse.CreditCard;
 
 namespace Checkout.VMs
 {
@@ -214,6 +216,35 @@ namespace Checkout.VMs
             set { SetField(ref emailAddress, value); }
         }
 
+        private long cCardNum;
+        public long CCNUM
+        {
+            get { return cCardNum; }
+            set { SetField(ref cCardNum, value); }
+        }
+
+        private int expMonth;
+        public int ExpMonth
+        {
+            get { return expMonth; }
+            set { SetField(ref expMonth, value); }
+        }
+
+        private int expYear;
+        public int ExpYear
+        {
+            get { return expYear; }
+            set { SetField(ref expYear, value); }
+        }
+
+        private int cvv;
+        public int CVV
+        {
+            get { return cvv; }
+            set { SetField(ref cvv, value); }
+        }
+               
+
         private ICommand addMyNameToDb;
         public ICommand AddMyNameToDb=> addMyNameToDb ??(addMyNameToDb = new SimpleCommand(
            ()=>
@@ -251,27 +282,42 @@ namespace Checkout.VMs
                 {
                     return;
                 }
-                VerifyBool = true;
-                EmailLock = true;
-                SelectedCustomer = dataStore.GetCustomerByEmail(EmailAddress);
-                if (SelectedCustomer.Count != 0)
+                if (EmailAddress != null)
                 {
-                    foreach (var c in SelectedCustomer)
+                    try
                     {
-                        FirstName = c.FirstName.NewName;
-                        LastName = c.LastName.NewName;
-                        sStreet = c.ShippingAddress.Street.AddressStreet;
-                        sCity = c.ShippingAddress.City.AddressCity;
-                        sState = c.ShippingAddress.State.AddressState;
-                        sZip = c.ShippingAddress.Zip.AddressZip;
-                        bStreet = c.BillingAddress.Street.AddressStreet;
-                        bCity = c.BillingAddress.City.AddressCity;
-                        bState = c.BillingAddress.State.AddressState;
-                        bZip = c.BillingAddress.Zip.AddressZip;
+
+                        var email = new EmailAddress(EmailAddress);
+
+
+                        VerifyBool = true;
+                        EmailLock = true;
+                        SelectedCustomer = dataStore.GetCustomerByEmail(EmailAddress);
+                        if (SelectedCustomer.Count != 0)
+                        {
+                            foreach (var c in SelectedCustomer)
+                            {
+                                FirstName = c.FirstName.NewName;
+                                LastName = c.LastName.NewName;
+                                sStreet = c.ShippingAddress.Street.AddressStreet;
+                                sCity = c.ShippingAddress.City.AddressCity;
+                                sState = c.ShippingAddress.State.AddressState;
+                                sZip = c.ShippingAddress.Zip.AddressZip;
+                                bStreet = c.BillingAddress.Street.AddressStreet;
+                                bCity = c.BillingAddress.City.AddressCity;
+                                bState = c.BillingAddress.State.AddressState;
+                                bZip = c.BillingAddress.Zip.AddressZip;
+                            }
+                        }
+                        else
+                            IsNewCustomer = true;
+
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                else
-                    IsNewCustomer = true;
             }));
 
 
@@ -282,21 +328,28 @@ namespace Checkout.VMs
                 //add new customer
                 if (IsNewCustomer == true)
                 {
-                    Customer c = new Customer(
-                    FirstName,
-                    LastName,
-                    sStreet,
-                    sCity,
-                    sState,
-                    sZip,
-                    bStreet,
-                    bCity,
-                    bState,
-                    bZip,
-                    EmailAddress);
-                    dataStore.AddCustomer(c);
-                    FinalBool = true;
-                    CustomerLock = true;
+                    try
+                    {
+                        Customer c = new Customer(
+                        FirstName,
+                        LastName,
+                        sStreet,
+                        sCity,
+                        sState,
+                        sZip,
+                        bStreet,
+                        bCity,
+                        bState,
+                        bZip,
+                        EmailAddress);
+                        dataStore.AddCustomer(c);
+                        FinalBool = true;
+                        CustomerLock = true;
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 //update existing customer
                 else
@@ -314,6 +367,24 @@ namespace Checkout.VMs
                 }
                 
             }));
+
+        private ICommand submit;
+        public ICommand Submit => submit ?? (submit = new SimpleCommand(
+            () => 
+            {
+                try {
+                    var c = new CCardNum();
+                    var cardIsValid = c.ValidCharge(CCNUM, expMonth, expYear, CVV);
+
+                    if (cardIsValid)
+                    {
+                        //display order
+                        MessageBox.Show("Your order was created successfully:)", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (Exception e) { MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error); }
+            }));
+
 
         public ObservableCollection<Customer> Customers { get; private set; }
         public ObservableCollection<Customer> SelectedCustomer { get; private set; }
