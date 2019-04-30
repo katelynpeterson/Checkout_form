@@ -173,14 +173,14 @@
             <TextBlock Grid.Row="1" Text="Exp" VerticalAlignment="Center"/>
             <TextBlock Grid.Row="1" Grid.Column="2" Text="/" VerticalAlignment="Center"/>
             <TextBlock HorizontalAlignment="Right" Grid.Row="1" Grid.Column="5" Text="CVV:  " VerticalAlignment="Center"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding expMonth}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding expYear}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Text="{Binding ExpMonth}"/>
+            <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" Text="{Binding ExpYear}"/>
             <TextBox VerticalAlignment="Center" Grid.Row="1" Grid.Column="6" Text="{Binding CVV}"/>
             <Button Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="6" Content="Submit Purchase" Command="{Binding Submit}"/>
 
 
         </Grid>
-        <StackPanel Grid.Column="4"
+        <!--<StackPanel Grid.Column="4"
                     Grid.Row="15">
                         <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Name" />
@@ -196,7 +196,7 @@
                             <TextBlock Text="{Binding Price}" />
                                 
                             </StackPanel>
-                            <!--<TextBlock Text="{Binding Quantity}" />-->
+                            --><!--<TextBlock Text="{Binding Quantity}" />--><!--
                         </StackPanel>
                     </Viewbox>
                 </DataTemplate>
@@ -214,7 +214,7 @@
         </StackPanel>
         <TextBlock Grid.Column="3"
                    Grid.Row="15"
-                   Text="{Binding MyName}" />
+                   Text="{Binding MyName}" />-->
 
     </Grid>
 </Window>

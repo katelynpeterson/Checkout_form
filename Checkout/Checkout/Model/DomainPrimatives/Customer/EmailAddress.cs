@@ -23,7 +23,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             }
 
             else
-                failGracefully();
+                throw new Exception("Invalid email address.");
         }
 
         private string email;

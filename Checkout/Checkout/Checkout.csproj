@@ -169,6 +169,7 @@
     <Compile Include="Model\FailGracefully.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\MyName.cs" />
+    <Compile Include="Model\ValidationException.cs" />
     <Compile Include="VMs\CheckoutVM.cs" />
     <Compile Include="VMs\DB-VM.cs" />
     <Compile Include="Model\DomainPrimatives\Customer\Address.cs" />
