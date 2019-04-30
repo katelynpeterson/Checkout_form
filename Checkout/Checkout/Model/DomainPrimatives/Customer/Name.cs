@@ -19,7 +19,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             {
                 // capitalize the first letter
                 s = s.First().ToString().ToUpper() + s.Substring(1);
-                newName = s;
+                NewName = s;
             }
                 
             else

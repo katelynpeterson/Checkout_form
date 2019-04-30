@@ -93,7 +93,7 @@ namespace Checkout.Data
             if (!_created)
             {
                 _created = true;
-                Database.EnsureDeleted();
+                //Database.EnsureDeleted();
                 Database.EnsureCreated();
             }
         }
@@ -111,9 +111,9 @@ namespace Checkout.Data
         }
 
         public DbSet<CustomerDTO> Customers { get; set; }
-        //public DbSet<Log> Log { get; set; }
-        //public DbSet<Order> Orders { get; set; }
         public DbSet<ProductDTO> Products { get; set; }
         public DbSet<MyName> MyName { get; set; }
+        //public DbSet<Log> Log { get; set; }
+        //public DbSet<Order> Orders { get; set; }
     }
 }

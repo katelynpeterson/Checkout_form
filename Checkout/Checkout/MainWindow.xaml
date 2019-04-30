@@ -56,20 +56,36 @@
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold">Product</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Price</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" FontWeight="Bold">Quantity</TextBlock>
-            <TextBlock Grid.Row="2" Text="{Binding Products[0].Name}"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Products[0].Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[0], Mode=TwoWay}"/>
-            <TextBlock Grid.Row="3" Text="{Binding Products[1].Name}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Products[1].Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="3" Grid.Column="2"  IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[1], Mode=TwoWay}"/>
-            <TextBlock Grid.Row="4" Text="{Binding Products[2].Name}"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Products[2].Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="4" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[2], Mode=TwoWay}"/>
-            <TextBlock Grid.Row="5" Text="{Binding Products[3].Name}"/>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Products[3].Price}"/>
-            <TextBox VerticalAlignment="Center" Grid.Row="5" Grid.Column="2" IsReadOnly="{Binding OrderLock}" Text="{Binding QuantityList[3], Mode=TwoWay}"/>
+            <TextBlock Grid.Row="2" Text="{Binding Products[0].Name.NewName}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Products[0].Price.ProductPrice}"/>
+            <TextBox VerticalAlignment="Center"
+                     Grid.Row="2"
+                     Grid.Column="2"
+                     IsReadOnly="{Binding OrderLock}"
+                     Text="{Binding Products[0].Quantity.Quan, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="3" Text="{Binding Products[1].Name.NewName}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Products[1].Price.ProductPrice}"/>
+            <TextBox VerticalAlignment="Center"
+                     Grid.Row="3"
+                     Grid.Column="2"
+                     IsReadOnly="{Binding OrderLock}"
+                     Text="{Binding Products[1].Quantity.Quan, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="4" Text="{Binding Products[2].Name.NewName}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Products[2].Price.ProductPrice}"/>
+            <TextBox VerticalAlignment="Center"
+                     Grid.Row="4"
+                     Grid.Column="2"
+                     IsReadOnly="{Binding OrderLock}"
+                     Text="{Binding Products[2].Quantity.Quan, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="5" Text="{Binding Products[3].Name.NewName}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Products[3].Price.ProductPrice}"/>
+            <TextBox VerticalAlignment="Center"
+                     Grid.Row="5"
+                     Grid.Column="2"
+                     IsReadOnly="{Binding OrderLock}"
+                     Text="{Binding Products[3].Quantity.Quan, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" FontWeight="Bold" Text="TOTAL"/>
-            <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total, Mode=TwoWay}"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
             <Button VerticalAlignment="Center"
                     Width="100"
                     Content="Checkout"

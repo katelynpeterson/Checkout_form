@@ -19,7 +19,7 @@ using Checkout.VMs.OneTimeUse.CreditCard;
 
 namespace Checkout.VMs
 {
-    public class CheckoutVM : INotifyPropertyChanged    
+    public class CheckoutVM : INotifyPropertyChanged
     {
 
         private readonly IDataStore dataStore;
@@ -29,17 +29,17 @@ namespace Checkout.VMs
         public CheckoutVM(IDataStore dataStore)
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
-            ProductList = new ObservableCollection<Product>();
-            ProductList.Add(new Product(1, "African Safari", 2000.00,0));
-            ProductList.Add(new Product(2, "Mexico Safari", 1500.00,0));
-            ProductList.Add(new Product(3, "Australian Safari", 4200.00,0));
-            ProductList.Add(new Product(4, "Antarctic Safari", 7100.00,0));
-            foreach (var p in ProductList)
-            {
-                dataStore.AddProduct(p);
-            }
-            Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
-            dataStore.AddCustomer(c);
+            //ProductList = new ObservableCollection<Product>();
+            //ProductList.Add(new Product(1, "African Safari", 2000.00,0));
+            //ProductList.Add(new Product(2, "Mexico Safari", 1500.00,0));
+            //ProductList.Add(new Product(3, "Australian Safari", 4200.00,0));
+            //ProductList.Add(new Product(4, "Antarctic Safari", 7100.00,0));
+            //foreach (var p in ProductList)
+            //{
+            //    dataStore.AddProduct(p);
+            //}
+            //Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
+            //dataStore.AddCustomer(c);
             Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
             Products = new ObservableCollection<Product>(DataStore.GetAllProducts());
             SelectedCustomer = new ObservableCollection<Customer>();
@@ -47,13 +47,13 @@ namespace Checkout.VMs
             VerifyBool = false;
             FinalBool = false;
             CustomerLock = false;
-            foreach (Product p in Products)
-            {
-                Total += p.Price.ProductPrice * p.Quantity.Quan;
-            }
+            OrderLock = false;
+            Total = 0;
 
         }
 
+        //bools and locks
+        #region
         private bool customerBool;
         public bool CustomerBool
         {
@@ -81,7 +81,7 @@ namespace Checkout.VMs
             set { SetField(ref orderLock, value); }
         }
 
-        
+
         private bool emailLock;
         public bool EmailLock
         {
@@ -95,15 +95,16 @@ namespace Checkout.VMs
             get { return customerLock; }
             set { SetField(ref customerLock, value); }
         }
+        #endregion
 
-        private string myName;
-        public string MyName
-        {
-            get { return myName; }
-            set { myName = value;
-                OnPropertyChanged();
-            }
-        }
+        //private string myName;
+        //public string MyName
+        //{
+        //    get { return myName; }
+        //    set { myName = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         private double total;
         public double Total
@@ -115,12 +116,25 @@ namespace Checkout.VMs
             set
             {
                 double sum = 0;
-                for (int i = 0; i < ProductList.Count(); i++)
-                { sum += ProductList[i].Price.ProductPrice * ProductList[i].Quantity.Quan; }
+                for (int i = 0; i < Products.Count(); i++)
+                {
+                    sum += Products[i].Price.ProductPrice * Products[i].Quantity.Quan;
+                }
                 SetField(ref total, sum);
 
             }
         }
+
+        //properties
+        #region
+
+        private int quantity;
+        public int Quantity
+        {
+            get { return quantity; }
+            set { SetField(ref quantity, value); }
+        }
+
 
         private string firstname;
         public string FirstName
@@ -233,35 +247,36 @@ namespace Checkout.VMs
             get { return cvv; }
             set { SetField(ref cvv, value); }
         }
-               
+        #endregion
 
-        private ICommand addMyNameToDb;
-        public ICommand AddMyNameToDb=> addMyNameToDb ??(addMyNameToDb = new SimpleCommand(
-           ()=>
-        {
-            MyName name = new MyName(MyName);
-            dataStore.AddMeToDb(name);
-        }));
+        //private ICommand addMyNameToDb;
+        //public ICommand AddMyNameToDb=> addMyNameToDb ??(addMyNameToDb = new SimpleCommand(
+        //   ()=>
+        //{
+        //    MyName name = new MyName(MyName);
+        //    dataStore.AddMeToDb(name);
+        //}));
 
 
         private ICommand purchaseCommand;
         public ICommand PurchaseCommand => purchaseCommand ?? (purchaseCommand = new SimpleCommand(
             () =>
             {
-                OrderLock = true;
-                CustomerBool = true;
-                //ObservableCollection<Product> tempP = new ObservableCollection<Product>();
-                //ObservableCollection<int> tempQ = new ObservableCollection<int>();
-                //for (int i = 0; i < QuantityList.Count(); i++)
-                //{
-                //    if (QuantityList[i] > 0)
-                //    {
-                //        tempP.Add(ProductList[i]);
-                //        tempQ.Add(QuantityList[i]);
-                //    }
-                //}
-                //DataStore.AddLog(new Log("Order Created"));
-                //Order CustomerOrder = new Order(tempP, tempQ);
+                try
+                {
+                    foreach (var p in Products)
+                    {
+                            Total += p.Cost;
+                        //if (p.Quantity.validateQuantity(p.Quantity.Quan))
+                        //{
+
+                        //}
+                    }
+                    OrderLock = true;
+                    CustomerBool = true;
+                }
+                catch (Exception e) { MessageBox.Show(e.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error); }
+                
             }));
 
         private ICommand searchCommand;
@@ -355,14 +370,15 @@ namespace Checkout.VMs
                     FinalBool = true;
                     CustomerLock = true;
                 }
-                
+
             }));
 
         private ICommand submit;
         public ICommand Submit => submit ?? (submit = new SimpleCommand(
-            () => 
+            () =>
             {
-                try {
+                try
+                {
                     var c = new CCardNum();
                     var cardIsValid = c.ValidCharge(CCNUM, expMonth, expYear, CVV);
 
@@ -378,13 +394,13 @@ namespace Checkout.VMs
 
         public ObservableCollection<Customer> Customers { get; private set; }
         public ObservableCollection<Customer> SelectedCustomer { get; private set; }
+        public ObservableCollection<Product> Products { get; private set; }
         //public ObservableCollection<Order> OrderList{ get; set;}
         //public ObservableCollection<Order> CustomerOrderList{get;set;}
         //public Product NewProduct { get; private set; }
-        public ObservableCollection<Product> ProductList { get; private set; }
-        public ObservableCollection<Product> Products { get; private set; }
-        public ObservableCollection<Quantity> Quantities { get; private set; }
-        public ObservableCollection<int> QuantityList { get; private set; }
+        //public ObservableCollection<Product> ProductList { get; private set; }
+        //public ObservableCollection<Quantity> Quantities { get; private set; }
+        //public ObservableCollection<int> QuantityList { get; private set; }
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;

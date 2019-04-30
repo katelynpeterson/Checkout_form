@@ -26,7 +26,8 @@ namespace Checkout.VMs.DomainPrimatives.Product
         private double productPrice;
         public double ProductPrice
         {
-            get; private set;
+            get { return productPrice; }
+            private set { productPrice = value; }
         }
 
         public Boolean validatePrice(double f)
