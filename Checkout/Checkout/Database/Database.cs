@@ -88,7 +88,7 @@ namespace Checkout.Data
             if (!_created)
             {
                 _created = true;
-               // Database.EnsureDeleted();
+                //Database.EnsureDeleted();
                 Database.EnsureCreated();
             }
         }
