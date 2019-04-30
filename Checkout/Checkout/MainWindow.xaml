@@ -88,6 +88,12 @@
             <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Text="{Binding Total}"/>
             <Button VerticalAlignment="Center"
                     Width="100"
+                    Content="Update Total"
+                    Grid.Row="7"
+                    Grid.ColumnSpan="3"
+                    Command="{Binding UpdateTotal}" />
+            <Button VerticalAlignment="Center"
+                    Width="100"
                     Content="Checkout"
                     Grid.Row="8"
                     Grid.ColumnSpan="3"
