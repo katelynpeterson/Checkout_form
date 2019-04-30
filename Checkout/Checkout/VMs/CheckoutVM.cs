@@ -279,6 +279,17 @@ namespace Checkout.VMs
                 
             }));
 
+        private ICommand updateTotal;
+        public ICommand UpdateTotal => updateTotal ?? (updateTotal = new SimpleCommand(
+            () =>
+            {
+                foreach (var p in Products)
+                {
+                    Total += p.Cost;
+                }
+            }));
+
+
         private ICommand searchCommand;
         public ICommand SearchCommand => searchCommand ?? (searchCommand = new SimpleCommand(
             () =>
