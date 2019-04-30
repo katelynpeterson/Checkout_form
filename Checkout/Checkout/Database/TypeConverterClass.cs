@@ -63,6 +63,7 @@ namespace Checkout.VMs
             var temp = new Checkout.Database.DTO.LogDTO();
             temp.DateStamp = l.DateStamp;
             temp.Message = l.Message;
+            context.AddLog(temp);
         }
 
         public void AddMeToDb(MyName myName)

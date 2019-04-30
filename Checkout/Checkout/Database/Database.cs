@@ -72,7 +72,7 @@ namespace Checkout.Data
         public void AddLog(LogDTO l)
         {
             context.Log.Add(l);
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
     }
