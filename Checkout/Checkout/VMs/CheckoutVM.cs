@@ -25,20 +25,21 @@ namespace Checkout.VMs
         private readonly IDataStore dataStore;
         public IDataStore DataStore => dataStore;
 
+        public CheckoutVM() { }
         public CheckoutVM(IDataStore dataStore)
         {
             this.dataStore = dataStore ?? throw new ArgumentNullException(nameof(dataStore));
-            //ProductList = new ObservableCollection<Product>();
-            //ProductList.Add(new Product(1, "African Safari", 2000.00));
-            //ProductList.Add(new Product(2, "Mexico Safari", 1500.00));
-            //ProductList.Add(new Product(3, "Australian Safari", 4200.00));
-            //ProductList.Add(new Product(4, "Antarctic Safari", 7100.00));
-            //foreach (var p in ProductList)
-            //{
-            //    dataStore.AddProduct(p);
-            //}
-            //Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
-            //dataStore.AddCustomer(c);
+            ProductList = new ObservableCollection<Product>();
+            ProductList.Add(new Product(1, "African Safari", 2000.00,0));
+            ProductList.Add(new Product(2, "Mexico Safari", 1500.00,0));
+            ProductList.Add(new Product(3, "Australian Safari", 4200.00,0));
+            ProductList.Add(new Product(4, "Antarctic Safari", 7100.00,0));
+            foreach (var p in ProductList)
+            {
+                dataStore.AddProduct(p);
+            }
+            Customer c = new Customer("joe", "blow", "123 anywhere", "ephraim", "ut", "84627", "po box 123", "ephraim", "ut", "84627", "joe@joe.com");
+            dataStore.AddCustomer(c);
             Customers = new ObservableCollection<Customer>(DataStore.GetAllCustomers());
             Products = new ObservableCollection<Product>(DataStore.GetAllProducts());
             SelectedCustomer = new ObservableCollection<Customer>();
@@ -46,21 +47,12 @@ namespace Checkout.VMs
             VerifyBool = false;
             FinalBool = false;
             CustomerLock = false;
-        }
-        public CheckoutVM()
-        {
-            //Quantities = new ObservableCollection<Quantity>();
-            //QuantityList = new ObservableCollection<int>();
-            
-        
-            //for (int i = 0; i < ProductList.Count(); i++)
-            //    Quantities.Add(new Quantity("0"));
-            //    QuantityList.Add (0);
-            //Total = 0;
+            foreach (Product p in Products)
+            {
+                Total += p.Price.ProductPrice * p.Quantity.Quan;
+            }
 
         }
-
-
 
         private bool customerBool;
         public bool CustomerBool
@@ -113,24 +105,22 @@ namespace Checkout.VMs
             }
         }
 
-        //private double total;
-        //public double Total
-        //{
-        //    get
-        //    {
-        //        return total;
-        //    }
-        //    set
-        //    {
-        //        total = 0;
+        private double total;
+        public double Total
+        {
+            get
+            {
+                return total;
+            }
+            set
+            {
+                double sum = 0;
+                for (int i = 0; i < ProductList.Count(); i++)
+                { sum += ProductList[i].Price.ProductPrice * ProductList[i].Quantity.Quan; }
+                SetField(ref total, sum);
 
-        //        for (int i = 0; i < ProductList.Count(); i++)
-        //        {
-        //            total += ProductList[i].Cost * QuantityList[i];
-        //        }
-        //        OnPropertyChanged("Total");
-
-        //    }}
+            }
+        }
 
         private string firstname;
         public string FirstName
@@ -393,8 +383,8 @@ namespace Checkout.VMs
         //public Product NewProduct { get; private set; }
         public ObservableCollection<Product> ProductList { get; private set; }
         public ObservableCollection<Product> Products { get; private set; }
-        //public ObservableCollection<Quantity> Quantities{ get; private set;}
-        //public ObservableCollection<int> QuantityList{get; private set;}
+        public ObservableCollection<Quantity> Quantities { get; private set; }
+        public ObservableCollection<int> QuantityList { get; private set; }
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;

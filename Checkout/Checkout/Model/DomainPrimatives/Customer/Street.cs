@@ -34,14 +34,15 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             if (s.Length > 40)
             {
                 //Display string to long message
-                return false;
+                throw new Exception("Street address cannot exceed 40 characters.");
             }
             // Check characters
             if (Regex.IsMatch(s, @"^[a-zA-Z0-9]"))
             {
                 return true;
             }
-            else return false;
+            else
+                throw new Exception("There are invalid characters in the Street Address.");
         }
 
         public void failGracefully()

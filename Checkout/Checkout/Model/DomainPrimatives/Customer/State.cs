@@ -37,14 +37,15 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             if (s.Length > 2)
             {
                 //Display string to long message
-                return false;
+                throw new Exception("State can only contain 2 characters");
             }
             // Check characters
             if (Regex.IsMatch(s, @"^[a-zA-Z]"))
             {
                 return true;
             }
-            else return false;
+            else
+                throw new Exception("State contains invalid characters");
         }
 
         public void failGracefully()

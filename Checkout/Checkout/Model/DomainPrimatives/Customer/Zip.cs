@@ -33,14 +33,15 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             if (s.Length > 10)
             {
                 //Display string to long message
-                return false;
+                throw new Exception("Zip code contains 5 or 9 digits");
             }
             // Check characters
             if (Regex.IsMatch(s, @"^[0-9]{5}(?:-[0-9]{4})?$"))
             {
                 return true;
             }
-            else return false;
+            else
+                throw new Exception("That is not a valid zip code");
         }
 
         public void failGracefully()

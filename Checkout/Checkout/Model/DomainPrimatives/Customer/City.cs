@@ -17,12 +17,12 @@ namespace Checkout.VMs.DomainPrimatives.Customer
         }
         public City(String s)
         {
-             failGracefully = new FailGracefully();
+            failGracefully = new FailGracefully();
             if (validateCity(s))
                 AddressCity = s;
             else
             {
-                failGracefully.Message = "City contains " + CityError;
+            failGracefully.Message = "City contains " + CityError;
             throw new Exception(failGracefully.Message);
 
             }
