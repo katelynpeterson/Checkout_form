@@ -35,12 +35,17 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 
         public Boolean validateEmail(String s)
         {
+            // Check null
+            if (s == null)
+            {
+                throw new Exception("Email cannot be null");
+            }
             // Check length
 
-            if (s.Length > 30 || s ==null)
+            if (s.Length > 30)
             {
                 //Display string to long message
-                return false;
+                throw new Exception("Email cannot exceed 30 characters");
             }
             // Check characters
             try
@@ -50,7 +55,7 @@ namespace Checkout.VMs.DomainPrimatives.Customer
             }
             catch
             {
-                return false;
+                throw new Exception("That is not a valid email address");
             }
         }
 

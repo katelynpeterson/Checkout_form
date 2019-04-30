@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Checkout.VMs.DomainPrimatives.Customer;
+using Checkout.VMs.DomainPrimatives.Order;
 using Checkout.VMs.DomainPrimatives.Product;
 
 namespace Checkout.VMs.Entity
@@ -16,12 +18,21 @@ namespace Checkout.VMs.Entity
         {
 
         }
-        public Product(int id, string name, double price)
+        public Product(int id, string name, double price, int quantity)
         {
             ID = id;
-            Name = name;
-           Price = price;
+            Name = new Name(name);
+            Price = new Price(price);
+            Quantity = new Quantity(quantity);
+            Cost = Price.ProductPrice * Quantity.Quan;
 
+        }
+
+        private double cost;
+        public double Cost
+        {
+            get { return cost; }
+            set { SetField(ref cost, value); }
         }
 
         private int _id;
@@ -30,19 +41,27 @@ namespace Checkout.VMs.Entity
             set { SetField(ref _id, value); }
         }
 
-        private string name;
-        public string Name
+        private Name name;
+        public Name Name
         {
             get { return name; }
             set { SetField(ref name, value); }
         }
         
-        private double price;
-        public double Price
+        private Price price;
+        public Price Price
         {
             get { return price; }
             set { SetField(ref price, value); }
         }
+
+        private Quantity quantity;
+        public Quantity Quantity
+        {
+            get { return quantity; }
+            set { SetField(ref quantity, value); }
+        }
+
 
 
 

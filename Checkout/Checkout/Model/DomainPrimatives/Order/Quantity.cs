@@ -13,14 +13,10 @@ namespace Checkout.VMs.DomainPrimatives.Order
         {
 
         }
-        public Quantity(string i)
+        public Quantity(int i)
         {
-            int x = 0;
-            // TryParse tries to make i into an integer, if successful, expression is true and x is the integer
-            if (Int32.TryParse(i, out x))
-            {
-                validateQuantity(x);
-            }
+            validateQuantity(i);
+            Quan = i;
         }
 
         public int Quan
@@ -35,7 +31,7 @@ namespace Checkout.VMs.DomainPrimatives.Order
             {
                 return true;
             }
-            else return false;
+            throw new Exception("Quantity must be postive and less than 10");
         }
 
         public void failGracefully()

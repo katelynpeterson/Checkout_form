@@ -35,18 +35,24 @@ namespace Checkout.VMs.DomainPrimatives.Customer
 
         public Boolean validateName(String s)
         {
+            // Check null
+            if (s == null)
+            {
+                throw new Exception("Name cannot be blank");
+            }
             // Check length
             if (s.Length > 20)
             {
                 //Display string to long message
-                return false;
+                throw new Exception("Name must be less than 20 characters");
             }
             // Check characters
             if (Regex.IsMatch(s, @"^[a-zA-Z]"))
             {
                 return true;
             }
-            else return false;
+            else
+                throw new Exception("Invalid Characters in Name");
         }
 
         public void failGracefully()
